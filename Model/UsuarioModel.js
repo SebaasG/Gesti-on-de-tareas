@@ -23,9 +23,11 @@ export class usuarioModel{
         const user = (await conection).query('CALL verifyUser(?,?)',[user,password])
         if (user===0){
             console.log("el usuario no existe")
+            confirm = 0
         }
         else{
-            return user;
+            console.log('Bienvenido')
+            confirm=1;
         }
     }
 
