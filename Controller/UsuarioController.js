@@ -26,10 +26,11 @@ export class userController {
 
             const newUser = await this.usuarioModel.registerUser({ doc }, { user }, { pass })
             console.log(newUser + "controller")
-            // if (newUser === 2) {
-            //     res.status(404).json("el usuario ya existe")
-            // } else
-            //     res.status(201).json('El usuario fue creado con éxito')
+     
+            if (newUser === 2) {
+                res.status(404).json("el usuario ya existe")
+            } else
+                res.status(201).json('El usuario fue creado con éxito')
 
         } catch (error) {
             console.error('El nombre de usuario ya está en uso');

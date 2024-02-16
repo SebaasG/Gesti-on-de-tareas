@@ -1,4 +1,5 @@
 GET http://localHost:1234/user/login/sebas/sebas
 
 ###
-POST http://localHost:1234/user/register/7778/dsdsda/andrtrey
+
+POST http://localHost:1234/user/register/2342/aaa/3233
