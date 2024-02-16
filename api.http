@@ -1,4 +1,4 @@
-GET http://localHost:1234/user/login/andrey/andreya
+GET http://localHost:1234/user/login/sebas/sebas
 
 ###
-POST http://localHost:1234/user/register/12345/andrey/andrey
+POST http://localHost:1234/user/register/7778886655/dsdsd/andrtrey

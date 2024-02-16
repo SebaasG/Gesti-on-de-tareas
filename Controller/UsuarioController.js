@@ -8,34 +8,32 @@ export class userController {
             const { user } = req.params;
             const { pass } = req.params;
             const userfinally = await this.usuarioModel.verifySession({ user }, { pass })
-            res.json(userfinally)
+            if (userfinally === 2) {
+                res.status(400).json('Usuario o contraseña incorrectos')
+            } else
+                res.status(302).json('Bienvenido '+user)
+
         } catch (error) {
-            console.log('error: ' + error)
+            console.log('Error'+error)
         }
     }
 
     registerUser = async (req, res) => {
         try {
             const { doc } = req.params;
-            console.log(doc)
             const { user } = req.params;
-            console.log(user)
             const { pass } = req.params;
-            console.log(doc)
-            const newUser = await this.usuarioModel.registerUser({ doc }, { user }, { pass })
-            res.json(newUser)
-        } catch (error) {
-            console.log('error' + error)
-        }
 
-    }
-    encrypt = async (req,res) =>{
-        try {
-            const {pass} = req.params;
-            const passhash = await this.usuarioModel.encrypt({pass})
-            res.json(passhash)
+            const newUser = await this.usuarioModel.registerUser({ doc }, { user }, { pass })
+            console.log(newUser + "controller")
+            // if (newUser === 2) {
+            //     res.status(404).json("el usuario ya existe")
+            // } else
+            //     res.status(201).json('El usuario fue creado con éxito')
+
         } catch (error) {
-            
+            console.error('El nombre de usuario ya está en uso');
         }
     }
+
 }
