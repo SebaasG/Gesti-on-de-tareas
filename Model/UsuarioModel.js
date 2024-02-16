@@ -36,7 +36,7 @@ export class usuarioModel {
         }
     }
 
-    static async validateUser({ user }, { pass }){
+    static async validateUser({ user }, { pass }) {
         try {
             const passhash = await this.encrypt({ pass })
             const [rows] = await conection.execute('CALL validateUser(?, ?)', [user, passhash]);
@@ -45,9 +45,7 @@ export class usuarioModel {
             if (ammya === 1) {
                 return 1
             } else {
-                console.log("El usuario o documento ya está registrado ");
-             return 2
-             
+                return 2
             }
         } catch (error) {
             console.log("El usuario o documento ya está registrado ");
@@ -56,17 +54,17 @@ export class usuarioModel {
 
     static async registerUser({ doc }, { user }, { pass }) {
         try {
-            let message;
+   
             const cyperpass = await this.encrypt({ pass })
-            const verify = await this.validateUser({user},{pass})
-            console.log(verify+'verifycacion')
-            // if(verify === 1){
-            //     conection.query('Insert into user(docUser,nameUser,passUser) values (?,?,?)', [parseInt(doc), user, cyperpass])
-            //     return message = 1
-            // }else{
-            //     console.log('f')
-            //     return message = 2
-            // }
+            const verify = await this.validateUser({ user }, { pass })
+            console.log(verify + 'verifycacion')
+            if(verify === 2){
+                conection.query('Insert into user(docUser,nameUser,passUser) values (?,?,?)', [parseInt(doc), user, cyperpass])
+                return 1
+            }else{
+                console.log('f')
+                return 2
+            }
         } catch (error) {
             console.log('error al ejecutar el registro')
         }
