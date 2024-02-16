@@ -54,14 +54,35 @@ h2 {
     cursor: pointer;
     border: none;
     margin-top: 50px;
+    border-radius: 15px;
 }
 
 .Contenedor .elemento [type="submit"]:hover {
     background-color: #83a820;
     color: white;
+ 
+}
+
+
+
+#reg:hover{
+    text-decoration: none;
+  
+    color: #eaff85;
+    
 }
 /* .register{
     text-decoration: none;
     color: white;
     background-color: white;
 } */
+
+#reg{
+    margin-top: 10px;
+    text-decoration: underline;
+    background-color:#b7d453 ;
+    color: white;
+   
+    padding: 0px;
+    
+} 
