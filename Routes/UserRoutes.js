@@ -7,6 +7,7 @@ export const createUserRoutes = ({usuarioModel})=>{
     const UserController = new userController({usuarioModel})
 
     userRoutes.get("/login/:user/:pass", UserController.verifySession)
-
+    userRoutes.post('/register/:doc/:user/:pass', UserController.registerUser)
+    userRoutes.get('/hash', UserController.encrypt)
     return userRoutes
 }

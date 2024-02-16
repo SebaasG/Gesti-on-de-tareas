@@ -7,6 +7,7 @@ const app = express();
 app.use('/user',createUserRoutes({usuarioModel:usuarioModel}) )
 
 const PORT  = process.env.PORT || 1234
+app.disable('x-powered-by'); 
 
 app.listen(PORT, ()=>{
     console.log('This application litening on the port http://localHost:'+PORT)

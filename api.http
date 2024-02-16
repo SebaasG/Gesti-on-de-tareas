@@ -1,1 +1,4 @@
-GET http://localHost:1234/user/login/hola/sisi
+GET http://localHost:1234/user/login/andrey/andreya
+
+###
+POST http://localHost:1234/user/register/12345/andrey/andrey
