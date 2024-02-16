@@ -1,6 +1,5 @@
 import mysql from 'mysql2/promise'
 import crypto from 'crypto';
-import { OK, never } from 'zod';
 
 const confi = {
     host: 'localhost',
@@ -53,7 +52,6 @@ export class usuarioModel {
 
     static async registerUser({ doc }, { user }, { pass }) {
         try {
-   
             const cyberpass = await this.encrypt({ pass })
             const verify = await this.validateUser({ doc }, { user })
             console.log(verify + 'verifycacion')
