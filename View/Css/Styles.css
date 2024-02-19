@@ -5,12 +5,13 @@ html {
 body {
     padding: 0;
     margin: 0;
-    background: linear-gradient(#83a820, #b7d453);
+    background: linear-gradient(#00003d,#00276c, #014ba0 );
 }
 
 h2 {
-    margin: 30px;
-    color: white;
+    margin-top: -11%;
+    margin-bottom: 44px;
+    color: #f7f0f5;
     text-align: center;
     font-size: 35px;
     font-family: 'Times New Roman', Times, serif;
@@ -24,13 +25,13 @@ h2 {
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 60px 50px;
-    background: #b7d453;
+    background:#00003d;
     border-radius: 20px;
 
 }
 
 .Contenedor .elemento label {
-    color: white;
+    color: #ffff;
     font-size: 20px;
     margin: 10px;
     padding-top: 15px;
@@ -38,15 +39,17 @@ h2 {
 
 .Contenedor .elemento input {
     padding: 5px;
+    color: white;
     margin: 15px;
     border: none;
     background-color: transparent;
-    border-bottom: 1px #eaff85 solid;
+    border-bottom: 1px #e4e6c9 solid;
     width: 250px;
 }
 
 .Contenedor .elemento [type="submit"] {
-    background-color: #eaff85;
+    background-color: #014ba0;
+    color: #ffff;
     padding: 15px;
     align-items: center;
     text-transform: uppercase;
@@ -58,17 +61,15 @@ h2 {
 }
 
 .Contenedor .elemento [type="submit"]:hover {
-    background-color: #83a820;
+    background-color:#96b3ff;
     color: white;
  
 }
 
-
-
 #reg:hover{
     text-decoration: none;
   
-    color: #eaff85;
+    color: #96b3ff;
     
 }
 /* .register{
@@ -80,7 +81,7 @@ h2 {
 #reg{
     margin-top: 10px;
     text-decoration: underline;
-    background-color:#b7d453 ;
+    background-color:#00003d ;
     color: white;
    
     padding: 0px;

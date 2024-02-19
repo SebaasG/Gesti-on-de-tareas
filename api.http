@@ -6,7 +6,7 @@ POST http://localHost:1234/user/register
 Content-Type: application/json
 
     {
-    "docUser": 12345789,
-    "nameUser": "password",
-    "passUser": "password"
+    "docUser": 8765347,
+    "nameUser": "ayuda",
+    "passUser": "no"
     }   
