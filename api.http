@@ -2,4 +2,11 @@ GET http://localHost:1234/user/login/sebas/sebas
 
 ###
 
-POST http://localHost:1234/user/register/14324/daniel/daniel453423@mail
+POST http://localHost:1234/user/register
+Content-Type: application/json
+
+    {
+    "docUser": 111222333,
+    "nameUser": "dsds",
+    "passUser": "jejeje"
+    }   

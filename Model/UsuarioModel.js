@@ -13,9 +13,9 @@ const conection = await mysql.createConnection(confi)
 
 export class usuarioModel {
 
-    static async encrypt({ pass }) {
+    static async encrypt( passUser ) {
         const hash = crypto.createHash('sha3-256'); // 
-        hash.update(pass);
+        hash.update(passUser);
         return hash.digest('hex');
     }
 
@@ -35,9 +35,9 @@ export class usuarioModel {
         }
     }
 
-    static async validateUser({ doc },{ user } ) {
+    static async validateUser( docUser ,  nameUser ) {
         try {
-            const [rows] = await conection.execute('CALL validateUser(?, ?)', [doc, user]);
+            const [rows] = await conection.execute('CALL validateUser(?, ?)', [docUser, nameUser]);
             const ammya = rows[0][0].result;
             console.log(ammya)
             if (ammya === 1) {
@@ -46,24 +46,28 @@ export class usuarioModel {
                 return 2
             }
         } catch (error) {
-            console.log(""+error);
+            console.log("" + error);
         }
     }
 
-    static async registerUser({ doc }, { user }, { pass }) {
+    static async registerUser(docUser, nameUser, passUser) {
         try {
-            const cyberpass = await this.encrypt({ pass })
-            const verify = await this.validateUser({ doc }, { user })
+
+            const cyberpass = await this.encrypt(passUser)
+
+            const verify = await this.validateUser(docUser, nameUser)
+           
             console.log(verify + 'verifycacion')
-            if(verify === 2){
-                conection.query('Insert into user(docUser,nameUser,passUser) values (?,?,?)', [parseInt(doc), user, cyberpass])
+            console.log(docUser,nameUser,cyberpass)
+            if (verify === 2) {
+                conection.query('Insert into user(docUser,nameUser,passUser) values (?,?,?)', [docUser, nameUser, cyberpass])
                 return 1
-            }else{
+            } else {
                 console.log('f')
                 return 2
             }
         } catch (error) {
-            console.log('error al ejecutar el registro')
+            console.log('error al ejecutar el registro' + error)
         }
     }
 }
