@@ -19,9 +19,9 @@ export class usuarioModel {
         return hash.digest('hex');
     }
 
-    static async verifySession({ user }, { pass }) {
+    static async verifySession( user , pass ) {
         try {
-            const passhash = await this.encrypt({ pass })
+            const passhash = await this.encrypt( pass )
             const [rows] = await conection.execute('CALL verifyUser(?, ?)', [user, passhash]);
             const result = rows[0][0].result;
             if (result === 1) {
@@ -30,8 +30,8 @@ export class usuarioModel {
                 return 2
             }
         } catch (error) {
-            console.error("Error en la consulta:", error);
-            return null;
+            throw error;
+         
         }
     }
 
@@ -39,14 +39,13 @@ export class usuarioModel {
         try {
             const [rows] = await conection.execute('CALL validateUser(?, ?)', [docUser, nameUser]);
             const ammya = rows[0][0].result;
-            console.log(ammya)
             if (ammya === 1) {
                 return 1
             } else {
                 return 2
             }
         } catch (error) {
-            console.log("" + error);
+            throw error;
         }
     }
 
@@ -54,20 +53,17 @@ export class usuarioModel {
         try {
 
             const cyberpass = await this.encrypt(passUser)
-
             const verify = await this.validateUser(docUser, nameUser)
-           
-            console.log(verify + 'verifycacion')
-            console.log(docUser,nameUser,cyberpass)
+
             if (verify === 2) {
                 conection.query('Insert into user(docUser,nameUser,passUser) values (?,?,?)', [docUser, nameUser, cyberpass])
                 return 1
             } else {
-                console.log('f')
+              
                 return 2
             }
         } catch (error) {
-            console.log('error al ejecutar el registro' + error)
+            throw error;
         }
     }
 }

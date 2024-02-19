@@ -5,10 +5,11 @@ export class userController {
 
     verifySession = async (req, res) => {
         try {
-            
-            const { user } = req.params;
-            const { pass } = req.params;
-            const userfinally = await this.usuarioModel.verifySession({ user }, { pass })
+
+            const user = req.params.user;
+            const pass = req.params.pass;
+            const userfinally = await this.usuarioModel.verifySession(user, pass)
+
             if (userfinally === 2) {
                 res.status(400).json('Usuario o contraseña incorrectos')
             } else
@@ -22,23 +23,22 @@ export class userController {
     registerUser = async (req, res) => {
         try {
 
-            const docUser = req.body.docUser;//Esto es para traer el valor real del objeto
-            const nameUser = req.body.nameUser;
-            const passUser = req.body.passUser;
-
+            const { docUser, nameUser, passUser } = req.body;//Esto nos sirve para extraer solo el body de cada uno
             const newUser = await this.usuarioModel.registerUser(docUser, nameUser, passUser)
-    
-            if (newUser === 2) {
-                res.status(404).json("El documento o el nombre de usuario ya está en uso")
-            } else if(newUser){
-                res.status(201).json('El usuario fue creado con éxito')
-            }else{
-                res.status(500).json('Error al crear su usuario')
-            }
-                
 
+            this.handleUser(newUser, res)
         } catch (error) {
-            console.error('Error al crear el usuario, por favor intentelo más tarde'+error);
+            res.status(500).json('Erro al crear el usuario')
+        }
+    }
+
+    handleUser = async (newUser, res) => {
+        if (newUser === 2) {
+            res.status(404).json("El documento o el nombre de usuario ya está en uso")
+        } else if (newUser === 1) {
+            res.status(201).json('El usuario fue creado con éxito')
+        } else {
+            res.status(500).json('Error al crear su usuario')
         }
     }
 
