@@ -2,11 +2,11 @@ const boton = document.getElementById('btn')
 async function login() {
     const user = document.getElementById('nombre').value;
     const pass = document.getElementById('pas').value;
-    console.log(user, pass)
+
 
     await fetch(`http://localHost:1234/user/login/${user}/${pass}`)
         .then(response => {
-            if (response.ok) {
+            if (response.ok) {            
                 Swal.fire({
                     position: 'center',
                     allowOutsideClick: false,
@@ -21,26 +21,33 @@ async function login() {
                     timer: 8000
                 });
                 setTimeout(() => {
-                    location.href = '../../View/hola.html';
+                    var nuevaPestana = window.open("../../View/hola.html", "_blank");
+            setTimeout(function () {
+                window.open('about:blank', '_self').close();
+            }, 2)
                 }, 3000);
-
             } else {
-                Swal.fire({
-                    position: 'center',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    allowEnterKey: false,
-                    stopKeydownPropagation: true,
-                    title: '¡ ERROR !',
-                    html: '<b class="texto-alerta"> ¡Usuario o contraseña incorrecta! </b>',
-                    icon: 'error',
-                    iconColor: '#00003d',
-                    confirmButtonColor: '#00003d',
-                    timer: 8000
-                });
-                // alet('papi sea serio')
+                alertaNegativa()
             }
         })
+}
+
+
+async function alertaNegativa(){
+    Swal.fire({
+        position: 'center',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        stopKeydownPropagation: true,
+        title: '¡ ERROR !',
+        html: '<b class="texto-alerta"> ¡Usuario o contraseña incorrecta! </b>',
+        icon: 'error',
+        iconColor: '#00003d',
+        confirmButtonColor: '#00003d',
+        timer: 8000
+    });
+    // alet('papi sea serio')
 }
 
 boton.addEventListener('click', () => {
