@@ -79,12 +79,12 @@ h2 {
     background-color: white;
 } */
 
-#reg{
-    margin-top: 10px;
+#reg, #return{
+    margin-top: 15px;
     text-decoration: underline;
     background-color:#00003d ;
     color: white;
-   
     padding: 0px;
     
 } 
+
