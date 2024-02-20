@@ -1,20 +1,85 @@
-body{
-    background-color:  white;
-    margin: 0%;
-    padding: 0%;
-}
+
 html {
     height: 100%;
+    margin: 0px;
+    padding: 0px;
+    
 }
 
 h1{
     
     text-align: center;
+    margin-top: 20px;
+    
 }
 
 .head  {
-    border: solid linear-gradient(#00003d);
-    color: white;
-    padding: 5px;
-    background: #00003d;
+
+
+    display: flex;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    margin: 10px;
 }
+
+.elemento {
+    align-items: center;
+    height: 78vh;
+    background-color: white;
+    width: 110vh;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Cada columna tendrá un ancho mínimo de 300px y se ajustará automáticamente según el tamaño del contenedor */
+    /* grid-auto-flow: row;
+    gap: 20px; 
+    justify-content: end;
+    justify-self: end; */
+  }
+  
+.tarjet{
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    color: #00276c;
+    padding: 20px;
+    margin: 20px;
+    border: solid blue ;
+}
+
+#botonCreate{
+height: 50px;
+width: 100px;
+color: #f0f0f0;
+background: #014ba0;
+grid-row: auto;
+}
+
+#botonCreate:hover{
+       background-color:#96b3ff;
+    color: white;
+}
+
+.elemento::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  .elemento::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color del "pulgar" de la barra de desplazamiento */
+    border-radius: 10px; /* Radio de la esquina del "pulgar" */
+  }
+  
+  .elemento::-webkit-scrollbar-track {
+    background-color: #ccc; /* Color de la pista de la barra de desplazamiento */
+  }
+
+
+  .cajita{
+    display: flex;
+    justify-content: space-between; 
+    border: solid black;
+    margin-right: 2%;
+    /* height: 80vh; */
+    width: 80vh;
+  }
