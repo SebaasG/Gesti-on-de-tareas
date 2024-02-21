@@ -47,12 +47,9 @@ async function alertaNegativa(){
         confirmButtonColor: '#00003d',
         timer: 8000
     });
-  
-    // alet('papi sea serio')
 }
 
 boton.addEventListener('click', () => {
     login()
-
 })
 
