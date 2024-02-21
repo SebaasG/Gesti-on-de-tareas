@@ -27,7 +27,6 @@ async function registerUser (){
             badAlert()
             throw new Error('Error en la solicitud: ' + response.statusText);
         }
-      
     })
     }
 
@@ -67,7 +66,6 @@ function badAlert(){
         timer: 8000
     });
 }
-
 
 function cleanInput(){
 
