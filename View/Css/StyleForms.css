@@ -7,15 +7,12 @@ html {
 }
 
 h1{
-    
     text-align: center;
     margin-top: 20px;
     
 }
 
 .head  {
-
-
     display: flex;
     justify-content: center;
     width: auto;
