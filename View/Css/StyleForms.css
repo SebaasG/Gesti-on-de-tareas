@@ -27,11 +27,7 @@ h1{
     width: 110vh;
     overflow: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Cada columna tendrá un ancho mínimo de 300px y se ajustará automáticamente según el tamaño del contenedor */
-    /* grid-auto-flow: row;
-    gap: 20px; 
-    justify-content: end;
-    justify-self: end; */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
   
 .tarjet{
@@ -54,7 +50,7 @@ grid-row: auto;
 }
 
 #botonCreate:hover{
-       background-color:#96b3ff;
+    background-color:#96b3ff;
     color: white;
 }
 
@@ -77,6 +73,5 @@ grid-row: auto;
     justify-content: space-between; 
     border: solid black;
     margin-right: 2%;
-    /* height: 80vh; */
     width: 80vh;
   }
