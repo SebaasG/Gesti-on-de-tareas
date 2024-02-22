@@ -19,12 +19,15 @@ export class TaskModel {
         return taks
     }
 
-    static async postTask(input) {
-        const postT = conection.query('insert into task (docUser, nameTask, descTask, stateTask, cateTask) values (?,?,?,?,?)', input.docUser, input.nameTask, input.descTask, input.stateTask, input.cateTask)
+    static async postTask(docUser,nameTask,descTask,stateTask,cateTask) {
+
+      
+        const postT = conection.query('insert into task (docUser, nameTask, descTask, stateTask, cateTask) values (?,?,?,?,?)',[ docUser, nameTask, descTask, stateTask, cateTask])
         if (postT) {
-            console.log('hola')
+         
             return true
         }
+        console.log('a no papi')
         return false
 
     }

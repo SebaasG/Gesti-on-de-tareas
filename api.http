@@ -19,10 +19,10 @@ GET http://localHost:1234/task/get
 POST http://localHost:1234/task/save
 Content-Type: application/json
 
-    {
+{
     "docUser": 1052382113,
-    "nameTask": "apiape",
-    "descTask": "una tarea de crear un servidor",
+    "nameTask": "al fin",
+    "descTask": "si mi chamos",
     "stateTask": 1,
     "cateTask": "personal"
-    }   
+}

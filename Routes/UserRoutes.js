@@ -18,7 +18,6 @@ export const createTaskRoutes = ({ TaskModel }) => {
 
     taskRoutes.get("/get", taskController.getTask)
     taskRoutes.post('/save', taskController.createTask)
-
-
+    
     return taskRoutes
 }

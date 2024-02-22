@@ -60,10 +60,10 @@ export class usuarioModel {
                 conection.query('Insert into user(docUser,nameUser,passUser) values (?,?,?)', [docUser, nameUser, cyberpass])
                 return 1
             } else {
-              
                 return 2
             }
         } catch (error) {
+            console.log(error)
             throw error;
         }
     }
