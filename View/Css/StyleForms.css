@@ -9,15 +9,16 @@ html {
 h1{
     text-align: center;
     margin-top: 20px;
+    margin-bottom: 30px;
     
 }
 
 .head  {
     display: flex;
-    justify-content: center;
+    justify-content: center;  
     width: auto;
     height: auto;
-    margin: 10px;
+    margin: 50px 10px 10px
 }
 
 .elemento {

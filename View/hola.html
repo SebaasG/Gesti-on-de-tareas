@@ -14,21 +14,26 @@
 
 <body>
     <h1>Gestor de tareas</h1>
-    <div class="modal-dialog modal-dialog-scrollable">
-        <button type="button" data-bs-toggle="modal" data-bs-target="#myModal">Launch modal</button>
-        <input type="text" id="myInput">
-    </div>
-    <div class="boton">
-        <!-- <button id="añadir">Create</button> -->
-        <!-- <button type="button" class="btn btn-outline-dark">Create</button> -->
-        <button type="button" class="btn" id="botonCreate">Create</button>
-    </div>
-
-
-
+   
     <div class="head">
 
         <div class="cajita">
+
+<div id="nameinp" class="cajasinput">
+    <label for="document">Name task: </label>
+    <input type="text" name="document" id="document">
+    </div>
+    <div id="descinp" class="cajasinput">
+        <label for="description">Description: </label>
+        <input type="text" name="description" id="description">
+        </div>
+
+        <div id="cateinp" class="cajasinput">
+            <label for="category">Category: </label>
+            <input type="text" name="category" id="category">
+            </div>
+
+            <input type="submit" value="Send">
 
 
         </div>
@@ -36,7 +41,7 @@
         <div id="container" class="elemento">
             
             
-
+<!-- 
             <div class="tarjet" data-bs-toggle="modal" data-bs-target="#miModal">
                 <h2>Hola</h2>
                 <p>categoria: </p>
@@ -49,21 +54,10 @@
                 <p>categoria: este presiona</p>
                 <p>Fecha de creacion</p>
                 <p>Estado:</p>
-            </div>
+            </div> -->
 
-            <div class="tarjet" data-bs-toggle="modal" data-bs-target="#miModal">
-                <h2>Hola</h2>
-                <p>categoria: </p>
-                <p>Fecha de creacion</p>
-                <p>Estado:</p>
-            </div>
 
-            <div class="tarjet" data-bs-toggle="modal" data-bs-target="#miModal">
-                <h2>Hola</h2>
-                <p>categoria: </p>
-                <p>Fecha de creacion</p>
-                <p>Estado:</p>
-            </div>  
+
 
             <div class="modal" id="miModal"> 
                 <div class="modal-dialog">

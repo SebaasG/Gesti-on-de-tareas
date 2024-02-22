@@ -15,8 +15,8 @@ const conection = await mysql.createConnection(confi)
 export class TaskModel{
 
     static async getTask(){
-        const {taks} = await conection.query('select * from task')
-        console.log({taks})
+        const [taks] = await conection.query('select * from task')
+       return taks
     }
 
 }   
