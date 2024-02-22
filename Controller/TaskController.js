@@ -19,4 +19,16 @@ export class TaskController {
             console.log(error)
         }
     }
+
+    findById =async (req,res)=>{
+        try {
+            const user = req.params.user;
+            const result = user.body
+            console.log(user+"contoleee")
+            const [data] = await this.TaskModel.getById(user)
+            res.status(200).json(data)  
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }

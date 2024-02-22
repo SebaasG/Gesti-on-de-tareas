@@ -32,5 +32,12 @@ export class TaskModel {
 
     }
 
+    static async getById(nameUser){
+        const doc = await conection.query("SELECT user.docUser FROM task INNER JOIN user ON task.docUser = user.docUser WHERE user.nameUser = ? LIMIT 1;",[nameUser])
+        console.log(doc)
+        return [doc]
+    }
+    
+
 }
 

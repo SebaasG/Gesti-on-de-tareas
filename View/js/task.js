@@ -1,3 +1,4 @@
+let docUser = localStorage.getItem('user');
 async function getTask() {
     const response = await fetch('http://localHost:1234/task/get')
     const datos = await response.json()
@@ -22,14 +23,42 @@ var tarjetas = document.getElementsByClassName('tarjet');
 for (var i = 0; i < tarjetas.length; i++) {
     tarjetas[i].addEventListener('click', function () {
 
-        // Aquí puedes agregar cualquier acción que desees que ocurra cuando se presione el elemento.
     });
 }
 
+async function getDocUser(){
 
+    const data = await fetch('http://localHost:1234/task/'+docUser)
+    const datos = await data.json()
+    console.log(datos)
+
+}   
 const btnCreate = document.getElementById('createTask');
+
 async function postTask(){
-const post = await fetch('') 
+
+
+    const nameTask = document.getElementById('document').value;
+    const descTask = document.getElementById('description').value;
+    const cateTask = document.getElementById('category').value; 
+
+console.log(docUser,nameTask,descTask,cateTask)
+
+// await fetch('http://localHost:1234/task/save'),{
+// method:'POST',
+// body: JSON.stringify({
+//     "docUser":userData ,
+//     "nameTask": nameTask,
+//     "descTask": descTask,
+//     "stateTask": 1,
+//     "cateTask": cateTask
+    
+// }),
+// headers: {
+//     "Content-Type": "application/json"
+// }
+// }
+// }
 }
 
 
@@ -38,6 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 btnCreate.addEventListener('click',()=>{
-    postTask();
+    getDocUser()
 })
 
