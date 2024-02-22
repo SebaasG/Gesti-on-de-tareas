@@ -12,12 +12,22 @@ export const confi = {
 
 const conection = await mysql.createConnection(confi)
 
-export class TaskModel{
+export class TaskModel {
 
-    static async getTask(){
+    static async getTask() {
         const [taks] = await conection.query('select * from task')
-       return taks
+        return taks
     }
 
-}   
+    static async postTask(input) {
+        const postT = conection.query('insert into task (docUser, nameTask, descTask, stateTask, cateTask) values (?,?,?,?,?)', input.docUser, input.nameTask, input.descTask, input.stateTask, input.cateTask)
+        if (postT) {
+            console.log('hola')
+            return true
+        }
+        return false
+
+    }
+
+}
 
