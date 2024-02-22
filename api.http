@@ -1,7 +1,6 @@
 GET http://localHost:1234/user/login/sebas/sebas
 
 ###
-
 POST http://localHost:1234/user/register
 Content-Type: application/json
 
@@ -10,3 +9,7 @@ Content-Type: application/json
     "nameUser": "ayuda",
     "passUser": "no"
     }   
+
+
+###
+GET http://localHost:1234/task/get

@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise'
 import crypto from 'crypto';
 
-const confi = {
+export const confi = {
     host: 'localhost',
     user: 'root',
     port: '3306',
@@ -31,7 +31,6 @@ export class usuarioModel {
             }
         } catch (error) {
             throw error;
-         
         }
     }
 
