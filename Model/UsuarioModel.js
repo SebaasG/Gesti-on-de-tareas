@@ -13,6 +13,8 @@ const conection = await mysql.createConnection(confi)
 
 export class usuarioModel {
 
+ 
+
     static async encrypt( passUser ) {
         const hash = crypto.createHash('sha3-256'); // 
         hash.update(passUser);

@@ -7,6 +7,7 @@ async function login() {
     await fetch(`http://localHost:1234/user/login/${user}/${pass}`)
         .then(response => {
             if (response.ok) {            
+                localStorage.setItem('user', user);
                 Swal.fire({
                     position: 'center',
                     allowOutsideClick: false,
