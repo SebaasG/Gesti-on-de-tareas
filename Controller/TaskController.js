@@ -20,11 +20,11 @@ export class TaskController {
         }
     }
 
-    findById =async (req,res)=>{
+    findDoc =async (req,res)=>{
         try {
             const user = req.params.user;
             console.log(user+"contoleee")
-            const data = await this.TaskModel.getById(user)
+            const data = await this.TaskModel.getdoc(user)
             res.status(200).json(data)  
             console.log('paso la')
         } catch (error) {

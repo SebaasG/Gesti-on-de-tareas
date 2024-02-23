@@ -18,6 +18,6 @@ export const createTaskRoutes = ({ TaskModel }) => {
 
     taskRoutes.get("/get", taskController.getTask)
     taskRoutes.post('/save', taskController.createTask)
-    taskRoutes.get('/:user' ,taskController.findById)
+    taskRoutes.get('/:user' ,taskController.findDoc)
     return taskRoutes
 }
