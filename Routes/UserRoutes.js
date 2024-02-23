@@ -16,8 +16,9 @@ export const createTaskRoutes = ({ TaskModel }) => {
     const taskRoutes = Router()
     const taskController = new TaskController({ TaskModel })
 
-    taskRoutes.get("/get", taskController.getTask)
+    taskRoutes.get("/get/:user", taskController.getTask)
     taskRoutes.post('/save', taskController.createTask)
     taskRoutes.get('/:user' ,taskController.findDoc)
+    taskRoutes.get('/doc/:id', taskController.getTaskById)
     return taskRoutes
 }

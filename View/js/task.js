@@ -3,11 +3,16 @@ var tarjetas = document.getElementsByClassName('tarjet'); //se usa para el for
 let nameUser = localStorage.getItem('user');// Se usa para almacenar el nombre del usuario en localStorage
 
 const btnCreate = document.getElementById('createTask');//Boton para crear una nueva tarea
+
+const btnCerrar = document.getElementById('cerrarSesion');
+
+
 let contador = 0
 async function getTask() {
-    
-    const response = await fetch('http://localHost:1234/task/get')
+    const docUser = await getDocUser(); 
+    const response = await fetch('http://localHost:1234/task/get/'+docUser)
     const datos = await response.json()
+    console.log(datos)
     datos.forEach(datos => {
         contador = contador+1
     // console.log(contador)
@@ -16,7 +21,8 @@ async function getTask() {
         div.innerHTML = `
             <div id = 'tarjet${contador}' class="tarjet" data-bs-toggle="modal" data-bs-target="#miModal">
             <div class="contenido"> 
-            <h3>${datos.nameTask}</h3>
+            <h4>${datos.nameTask}</h4> <br>
+            <p>Tarea: #${datos.numTask} </p>
             <p>categoria: ${datos.cateTask} </p>
             <p>Fecha de creacion: ${formattedDate}</p>
             <p>Estado: ${datos.stateTask}</p>
@@ -76,19 +82,23 @@ function newDate(date) {
     return formattedDate
 }
 
-
-// for (var i = 0; i < tarjetas.length; i++) {
-//     tarjetas[i].addEventListener('click', function () {
-// alert('Este es mi modal'+[i])
-//     });
-// }
-
 document.addEventListener('DOMContentLoaded', function () {
     getTask()
 });
 
 btnCreate.addEventListener('click', () => {
     postTask()
+})
+
+function closeSession(){
+    var nuevaPestana = window.open("../../index.html", "_blank");
+    setTimeout(function () {
+        window.open('about:blank', '_self').close();
+    }, 2)
+}
+
+btnCerrar.addEventListener('click', ()=>{
+    closeSession()
 })
 
 

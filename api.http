@@ -12,8 +12,9 @@ Content-Type: application/json
 
 
 ###
-GET http://localHost:1234/task/get
-
+GET http://localHost:1234/task/get/Sebastian
+###
+GET http://localHost:1234/task/doc/1
 ###
 GET http://localHost:1234/task/Sebastian
 

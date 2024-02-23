@@ -5,8 +5,16 @@ export class TaskController {
 
 
     getTask = async (req, res) => {
-        const taks = await this.TaskModel.getTask();
+        const result = req.params.user
+        console.log(result+"controller")
+        const taks = await this.TaskModel.getTask(result);
         res.status(200).json(taks)
+    }
+
+    getTaskById = async (req ,res) =>{
+        const result = req.params.id
+        const search = await this.TaskModel.getByid(result);
+        res.status(302).json(search)
     }
 
     createTask = async (req, res) => {
@@ -23,10 +31,8 @@ export class TaskController {
     findDoc =async (req,res)=>{
         try {
             const user = req.params.user;
-            console.log(user+"contoleee")
             const data = await this.TaskModel.getdoc(user)
             res.status(200).json(data)  
-            console.log('paso la')
         } catch (error) {
             console.log(error)
         }
