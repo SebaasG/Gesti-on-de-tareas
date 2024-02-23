@@ -12,10 +12,9 @@ async function getTask() {
     const docUser = await getDocUser(); 
     const response = await fetch('http://localHost:1234/task/get/'+docUser)
     const datos = await response.json()
-    console.log(datos)
+  
     datos.forEach(datos => {
         contador = contador+1
-    // console.log(contador)
         const formattedDate = newDate(datos.dateStart)
         let div = document.createElement('div');
         div.innerHTML = `
@@ -30,9 +29,39 @@ async function getTask() {
         </div> `;
         document.getElementById('container').appendChild(div);
     });
+
 };
 
 
+async function crearModal(){
+    const docUser = await getDocUser(); 
+    const response = await fetch('http://localHost:1234/task/doc/'+docUser)
+    const datos = await response.json()
+    console.log(datos)
+
+
+    let div = document.createElement('div');
+    div.innerHTML = `
+    <div class="modal" id="miModal"> 
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>${response.nameTask}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger">Eliminar</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div> `;
+        document.getElementById('container').appendChild(div);
+}
 
 async function getDocUser() {
     const data = await fetch('http://localHost:1234/task/' + nameUser)
@@ -58,7 +87,7 @@ async function postTask() {
             },
             body: JSON.stringify({
                 "docUser": datos,
-                "nameTask": nameTask,
+                "nameTask": nameTask,   
                 "descTask": descTask,
                 "stateTask": 1,
                 "cateTask": cateTask
@@ -84,6 +113,7 @@ function newDate(date) {
 
 document.addEventListener('DOMContentLoaded', function () {
     getTask()
+    
 });
 
 btnCreate.addEventListener('click', () => {

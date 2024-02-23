@@ -10,9 +10,8 @@ Content-Type: application/json
     "passUser": "no"
     }   
 
-
 ###
-GET http://localHost:1234/task/get/Sebastian
+GET http://localHost:1234/task/get/Daniel
 ###
 GET http://localHost:1234/task/doc/1
 ###

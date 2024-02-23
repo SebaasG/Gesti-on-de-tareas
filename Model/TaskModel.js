@@ -17,12 +17,13 @@ export class TaskModel {
 
 
     static async getTask(docUser) {
+
         const [taks] = await conection.query('select numTask, docUser, nameTask, descTask, stateTask,cateTask, dateStart from task where docUser = ?;', [docUser])
         return taks
     }
 
     static async getByid(numTask) {
-        const [search] = await conection.query('select * from task where task.numTask = ?;', [numTask])
+        const [search] = await conection.query('select numTask, docUser, nameTask, descTask, stateTask,cateTask, dateStart from task where task.numTask = ?;', [numTask])
         return search
     }
 

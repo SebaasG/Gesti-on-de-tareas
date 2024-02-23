@@ -6,8 +6,9 @@ export class TaskController {
 
     getTask = async (req, res) => {
         const result = req.params.user
-        console.log(result+"controller")
+        console.log(result)
         const taks = await this.TaskModel.getTask(result);
+        console.log(taks)
         res.status(200).json(taks)
     }
 
