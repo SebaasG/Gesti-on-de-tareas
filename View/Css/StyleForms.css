@@ -31,16 +31,18 @@ h1{
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
   
-.tarjet{
+  .tarjet {
     background-color: #f0f0f0;
     padding: 20px;
     box-sizing: border-box;
     border-radius: 10px;
     color: #00276c;
-    padding: 20px;
     margin: 20px;
-    border: solid blue ;
+    border: 1px solid blue;
+  
 }
+
+
 
 #botonCreate{
 height: 50px;
@@ -88,4 +90,11 @@ grid-row: auto;
       border: solid blue ;
 height:30vh ;
   width: 30vh;
+}
+.contenido {
+  overflow: hidden; /* Oculta el contenido que se desborda */
+  
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+
+
 }

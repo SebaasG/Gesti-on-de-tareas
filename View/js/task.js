@@ -1,17 +1,18 @@
-let docUser = localStorage.getItem('user');
+let nameUser = localStorage.getItem('user');
 async function getTask() {
     const response = await fetch('http://localHost:1234/task/get')
     const datos = await response.json()
-    console.log(datos)
-
     datos.forEach(datos => {
+        const formattedDate =  newDate(datos.dateStart)
         let div = document.createElement('div');
         div.innerHTML = `
             <div class="tarjet" data-bs-toggle="modal" data-bs-target="#miModal">
-            <h2>${datos.nameTask}</h2>
+            <div class="contenido"> 
+            <h3>${datos.nameTask}</h3>
             <p>categoria: ${datos.cateTask} </p>
-            <p>Fecha de creacion: ${datos.dateStart}</p>
+            <p>Fecha de creacion: ${formattedDate}</p>
             <p>Estado: ${datos.stateTask}</p>
+            </div>
         </div>
                     `;
         document.getElementById('container').appendChild(div);
@@ -26,39 +27,52 @@ for (var i = 0; i < tarjetas.length; i++) {
     });
 }
 
-async function getDocUser(){
-
-    const data = await fetch('http://localHost:1234/task/'+docUser)
+async function getDocUser() {
+    const data = await fetch('http://localHost:1234/task/' + nameUser)
     const datos = await data.json()
-    console.log(datos)
+    const docUser = datos[0].docUser
+    return docUser
 
-}   
+}
 const btnCreate = document.getElementById('createTask');
 
-async function postTask(){
+async function postTask() {
 
-
+    const datos = await getDocUser();
     const nameTask = document.getElementById('document').value;
     const descTask = document.getElementById('description').value;
-    const cateTask = document.getElementById('category').value; 
+    const cateTask = document.getElementById('category').value;
 
-console.log(docUser,nameTask,descTask,cateTask)
+    try {
 
-// await fetch('http://localHost:1234/task/save'),{
-// method:'POST',
-// body: JSON.stringify({
-//     "docUser":userData ,
-//     "nameTask": nameTask,
-//     "descTask": descTask,
-//     "stateTask": 1,
-//     "cateTask": cateTask
-    
-// }),
-// headers: {
-//     "Content-Type": "application/json"
-// }
-// }
-// }
+        await fetch('http://localHost:1234/task/save', {
+    method: 'POST',
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        "docUser": datos,
+        "nameTask": nameTask,
+        "descTask": descTask,
+        "stateTask": 1,
+        "cateTask": cateTask
+    })
+});
+location.reload()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+function newDate(date){
+    const fomat = new Date(date);
+    const formattedDate = fomat.toLocaleString("es-CO", {
+        timeZone: "America/Bogota",
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+    });
+    return formattedDate
 }
 
 
@@ -66,7 +80,8 @@ document.addEventListener('DOMContentLoaded', function () {
     getTask()
 });
 
-btnCreate.addEventListener('click',()=>{
-    getDocUser()
+btnCreate.addEventListener('click', () => {
+    postTask()
 })
+
 

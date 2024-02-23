@@ -23,10 +23,10 @@ export class TaskController {
     findById =async (req,res)=>{
         try {
             const user = req.params.user;
-            const result = user.body
             console.log(user+"contoleee")
-            const [data] = await this.TaskModel.getById(user)
+            const data = await this.TaskModel.getById(user)
             res.status(200).json(data)  
+            console.log('paso la')
         } catch (error) {
             console.log(error)
         }

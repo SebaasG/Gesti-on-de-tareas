@@ -15,7 +15,7 @@ const conection = await mysql.createConnection(confi)
 export class TaskModel {
 
     static async getTask() {
-        const [taks] = await conection.query('select * from task')
+        const [taks] = await conection.query('select docUser, nameTask, descTask, stateTask,cateTask, dateStart from task')
         return taks
     }
 
@@ -24,7 +24,6 @@ export class TaskModel {
       
         const postT = conection.query('insert into task (docUser, nameTask, descTask, stateTask, cateTask) values (?,?,?,?,?)',[ docUser, nameTask, descTask, stateTask, cateTask])
         if (postT) {
-         
             return true
         }
         console.log('a no papi')
@@ -33,9 +32,10 @@ export class TaskModel {
     }
 
     static async getById(nameUser){
-        const doc = await conection.query("SELECT user.docUser FROM task INNER JOIN user ON task.docUser = user.docUser WHERE user.nameUser = ? LIMIT 1;",[nameUser])
+        // const [doc] = await conection.query("SELECT user.docUser FROM task INNER JOIN user ON task.docUser = user.docUser WHERE user.nameUser = ? LIMIT 1;",[nameUser])
+        const [doc] = await conection.query("SELECT user.docUser FROM user WHERE user.nameUser = ? LIMIT 1;",[nameUser])
         console.log(doc)
-        return [doc]
+        return doc
     }
     
 
