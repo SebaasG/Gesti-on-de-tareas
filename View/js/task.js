@@ -24,17 +24,19 @@ async function getTask() {
 
     datos.forEach(datos => {
         contador = contador + 1
-        let valor = 2
+        let valor ;
         const formattedDate = newDate(datos.dateStart)
+        const states = state(datos.stateTask);
+        const cate  = validarCate(datos.cateTask);
         let div = document.createElement('div');
         div.innerHTML = `
             <div id = 'tarjet${contador}' class="tarjet" data-bs-toggle="modal" data-bs-target="#miModal">
             <div class="contenido"> 
             <h4>${datos.nameTask}</h4> <br>
             <p>Tarea: #${datos.numTask} </p>
-            <p>categoria: ${datos.cateTask} </p>
+            <p>categoria: ${cate} </p>
             <p>Fecha de creacion: ${formattedDate}</p>
-            <p>Estado: ${datos.stateTask}</p>
+            <p>Estado: ${states}</p>
             </div>
         </div> `;
         document.getElementById('container').appendChild(div);
@@ -127,6 +129,8 @@ botnmodal2.addEventListener('click', () => {
 async function llenarModal(num) {
     const response = await fetch('http://localHost:1234/task/doc/' + num);
     const datos = await response.json();
+    const cate  = validarCate(datos[0].cateTask);
+  
     const formDate = newDate(datos[0].dateStart, true);
     const states = state(datos[0].stateTask);
     document.getElementById('modalTitle').innerText = datos[0].nameTask;
@@ -134,10 +138,29 @@ async function llenarModal(num) {
         <p>Descripción de tarea: ${datos[0].descTask}</p>
         <p>Fecha de creación: ${formDate}</p>
         <p>Estado: ${states}</p>
-        <p>Categoria: ${datos[0].cateTask}</p>
+        <p>Categoria: ${cate}</p>
     `;
 
 }
+
+ function validarCate(cate){
+
+    if(cate === 1){
+        return "Personal"
+    }else if(cate === 2){
+        return "Trabajo"
+    }
+}
+
+function state(state) {
+    if (state === 1) {
+        return "Creado"
+    } else {
+        return "Terminado"
+    }
+}
+
+
 async function llenarModal2(num) {
     const response = await fetch('http://localHost:1234/task/doc/' + num);
     const datos = await response.json();
@@ -192,13 +215,7 @@ function LlenarCbo() {
     }
   }
 
-function state(state) {
-    if (state === 1) {
-        return "Creado"
-    } else {
-        return "Terminado"
-    }
-}
+
 
 
 function newDate(fecha, incluirHora = false) {
