@@ -29,8 +29,11 @@
         </div>
 
         <div id="cateinp" class="cajasinput">
-            <label for="category">Category: </label>
-            <input type="text" name="category" id="category">
+            <select class="form-select" id = "category" aria-label="Default select example">
+                <option selected>Select...</option>
+                <option value="1">Personal</option>
+                <option value="2">Trabajo</option>
+                </select>
             </div>
 
             <input type="submit" value="Send" id="createTask">

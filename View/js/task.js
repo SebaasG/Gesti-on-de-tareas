@@ -9,13 +9,11 @@ const btnCerrar = document.getElementById('cerrarSesion');
 let contador = 0
 
 
-
 async function getDocUser() {
     const data = await fetch('http://localHost:1234/task/' + nameUser)
     const datos = await data.json()
     const docUser = datos[0].docUser
     return docUser
-
 }
 
 //Funcion para guardar tareas
@@ -75,14 +73,13 @@ async function postTask() {
     }
 }
 
-// 1. Crea el modal una sola vez, fuera de la función
 let div = document.createElement('div');
 div.innerHTML = `
 <div class="modal" id="miModal">
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 id="modalTitle"></h4> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <h4 id="modalTitle"></h4> <button type="button" class="btn-close" data-bs-dismiss="modal" aria    -label="Close"></button>
     </div>
     <div class="modal-body">
       <div id="modalContent"></div> </div>
@@ -104,14 +101,9 @@ div.innerHTML = `
     </div>
     <div class="modal-body">
       <form>
-     
         <div class="mb-3" id = "averprueba">
-          
-     
         </div>
         <div class="mb-3">
-         
-         
         </div>
       </form>
     </div>
@@ -130,15 +122,11 @@ const botnmodal2 = document.getElementById('editButton')
 botnmodal2.addEventListener('click', () => {
     const valorLocal = localStorage.getItem('num')
     llenarModal2(valorLocal)
-
 })
-
-
 
 async function llenarModal(num) {
     const response = await fetch('http://localHost:1234/task/doc/' + num);
     const datos = await response.json();
-    let valor = 1;
     const formDate = newDate(datos[0].dateStart, true);
     const states = state(datos[0].stateTask);
     document.getElementById('modalTitle').innerText = datos[0].nameTask;
@@ -153,7 +141,9 @@ async function llenarModal(num) {
 async function llenarModal2(num) {
     const response = await fetch('http://localHost:1234/task/doc/' + num);
     const datos = await response.json();
-
+    
+   
+    localStorage.setItem('cate',datos[0].cateTask )
 
     document.getElementById('exampleModalLabel').innerText = `Tarea # ${datos[0].numTask}`
     document.getElementById('averprueba').innerHTML = `
@@ -162,7 +152,7 @@ async function llenarModal2(num) {
         <label for="recipient-name"  class="col-form-label">Description:</label> 
         <textarea class="form-control" id="message-text">${datos[0].descTask}</textarea>
         <label for="recipient-name"  class="col-form-label">Category:</label> 
-        <select class="form-select" aria-label="Default select example">
+        <select class="form-select" id = "cboCate" aria-label="Default select example">
         <option selected>Select...</option>
         <option value="1">Personal</option>
         <option value="2">Trabajo</option>
@@ -184,7 +174,23 @@ async function llenarModal2(num) {
         <div class="form-check">
         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
         </div>`
+        LlenarCbo()
+      
 }
+
+function LlenarCbo() {
+    const valorCombo = localStorage.getItem('cate');
+    console.log(valorCombo);
+  
+    const comboElement = document.getElementById("cboCate"); // Obtén el elemento del combobox por su ID
+  
+    if (valorCombo === '1') {
+      alert("Entro aquí");
+      comboElement.selectedIndex = 1; // Selecciona la opción 1
+    } else {
+      comboElement.selectedIndex = 2; // Selecciona la opción 2
+    }
+  }
 
 function state(state) {
     if (state === 1) {
@@ -194,7 +200,6 @@ function state(state) {
     }
 }
 
-//Esta función es solo para darle un formato de fecha que se trae desde MySQL
 
 function newDate(fecha, incluirHora = false) {
     const formato = new Date(fecha);
@@ -220,17 +225,14 @@ function closeSession() {
     }, 2)
 }
 
+
 document.addEventListener('DOMContentLoaded', function () {
     getTask()
-
-
 });
 
 btnCreate.addEventListener('click', () => {
     postTask()
 })
-
-
 
 btnCerrar.addEventListener('click', () => {
     closeSession()
