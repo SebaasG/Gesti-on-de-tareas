@@ -1,4 +1,4 @@
-//#region Declaración
+//#region DeclaracióneditButton
 var tarjetas = document.getElementsByClassName('tarjet'); //se usa para el for
 
 let nameUser = localStorage.getItem('user');// Se usa para almacenar el nombre del usuario en localStorage
@@ -7,7 +7,7 @@ const btnCreate = document.getElementById('createTask');//Boton para crear una n
 
 const btnCerrar = document.getElementById('cerrarSesion');
 
-const botnmodal2 = document.getElementById('editButton')
+
 
 let contador = 0
 //#endregion
@@ -120,6 +120,11 @@ div.innerHTML = `
 </div>
 `;
 document.getElementById('modalcont').appendChild(div);
+//#endregion
+
+//#region Actualizar Tareas
+
+
 //#endregion
 
 //#region llenar modales
@@ -259,14 +264,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 btnCreate.addEventListener('click', () => {
     postTask()
-})
+});
 
 btnCerrar.addEventListener('click', () => {
     closeSession()
-})
-
+});
+const botnmodal2 = document.getElementById('editButton')
 botnmodal2.addEventListener('click', () => {
     const valorLocal = localStorage.getItem('num')
+    console.log(valorLocal)
     llenarModal2(valorLocal)
-})
+});
 //#endregion
