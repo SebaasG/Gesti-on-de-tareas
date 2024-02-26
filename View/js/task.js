@@ -42,7 +42,8 @@ async function getTask() {
         // Añadir evento click para cada tarjeta creada
         document.querySelector('#tarjet' + contador).addEventListener('click', function () {
             // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
-            localStorage.setItem('num', datos.numTask)
+            const hola = localStorage.setItem('num', datos.numTask)
+            console.log
             llenarModal(datos.numTask)
         });
     });
@@ -124,11 +125,10 @@ div.innerHTML = `
 </div>
 `;
 document.getElementById('modalcont').appendChild(div);
-const valorLocal = localStorage.getItem('num')
-const botnmodal2 =document.getElementById('pruebamoda')
-botnmodal2.addEventListener('click',()=>{
 
-    alert('Se presiono');
+const botnmodal2 = document.getElementById('editButton')
+botnmodal2.addEventListener('click', () => {
+    const valorLocal = localStorage.getItem('num')
     llenarModal2(valorLocal)
     console.log(valorLocal)
 })
@@ -138,9 +138,9 @@ botnmodal2.addEventListener('click',()=>{
 async function llenarModal(num) {
     const response = await fetch('http://localHost:1234/task/doc/' + num);
     const datos = await response.json();
-    console.log(datos[0].nameTask);
-    const formDate = newDate1(datos[0].dateStart);
 
+    const formDate = newDate1(datos[0].dateStart);
+    const states = state(datos[0].stateTask);
     // Actualiza el título del modal
     document.getElementById('modalTitle').innerText = datos[0].nameTask
 
@@ -150,8 +150,9 @@ async function llenarModal(num) {
         <p>Descripción de tarea: ${datos[0].descTask}</p>
         <p>Fecha de inicio: ${datos[0].cateTask}</p>
         <p>Fecha de creación: ${formDate}</p>
+        <p>Estado: ${states}</p>
+        <p>Categoria: ${datos[0].cateTask}</p>
     `;
-
 
 }
 async function llenarModal2(num) {
@@ -160,17 +161,22 @@ async function llenarModal2(num) {
     console.log(datos[0].nameTask);
 
     document.getElementById('exampleModalLabel').innerText = `Tarea # ${datos[0].numTask}`
-        document.getElementById('averprueba').innerHTML = `
+    document.getElementById('averprueba').innerHTML = `
         <label for="recipient-name" id= class="col-form-label">Name task:</label> 
-     
+    
         <textarea class="form-control" id="message-text2">${datos[0].nameTask}</textarea>
         <label for="message-text" class="col-form-label">Description:</label>
         <textarea class="form-control" id="message-text">${datos[0].descTask}</textarea>
-        `
 
- // <p>Descripción de tarea: ${datos[0].descTask}</p>
-    // <p>Fecha de inicio: ${datos[0].cateTask}</p>
-    // <p>Fecha de creación: ${formDate}</p>
+        `
+}
+
+function state(state) {
+    if (state === 1) {
+        return "Estado pendiente"
+    } else {
+        return "Estado terminado"
+    }
 }
 
 //Esta función es solo para darle un formato de fecha que se trae desde MySQL
@@ -199,6 +205,13 @@ function newDate1(date) {
     return formattedDate
 }
 
+function closeSession() {
+    var nuevaPestana = window.open("../../index.html", "_blank");
+    setTimeout(function () {
+        window.open('about:blank', '_self').close();
+    }, 2)
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     getTask()
 
@@ -209,12 +222,7 @@ btnCreate.addEventListener('click', () => {
     postTask()
 })
 
-function closeSession() {
-    var nuevaPestana = window.open("../../index.html", "_blank");
-    setTimeout(function () {
-        window.open('about:blank', '_self').close();
-    }, 2)
-}
+
 
 btnCerrar.addEventListener('click', () => {
     closeSession()
