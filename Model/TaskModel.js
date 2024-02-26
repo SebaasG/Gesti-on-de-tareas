@@ -13,14 +13,12 @@ export const confi = {
 const conection = await mysql.createConnection(confi)
 
 export class TaskModel {
-
-
-
+  
     static async getTask(docUser) {
-
         const [taks] = await conection.query('select numTask, docUser, nameTask, descTask, stateTask,cateTask, dateStart from task where docUser = ?;', [docUser])
         return taks
     }
+
 
     static async getByid(numTask) {
         const [search] = await conection.query('select numTask, docUser, nameTask, descTask, stateTask,cateTask, dateStart from task where task.numTask = ?;', [numTask])
@@ -33,9 +31,7 @@ export class TaskModel {
         if (postT) {
             return true
         }
-
         return false
-
     }
 
     static async getdoc(nameUser) {
@@ -44,10 +40,9 @@ export class TaskModel {
         return doc
     }
 
-    static async updateTask( nameTask, descTask, stateTask, cateTask, docUser, numTask){
-        const put = await conection.query('UPDATE task SET nameTask = ?,  descTask = ?, stateTask = ?, cateTask = ? WHERE docUser = ? and numTask = ?;',[nameTask,descTask,stateTask,cateTask, docUser,numTask])
+    static async updateTask(nameTask, descTask, stateTask, cateTask, docUser, numTask) {
+        const put = await conection.query('UPDATE task SET nameTask = ?,  descTask = ?, stateTask = ?, cateTask = ? WHERE docUser = ? and numTask = ?;', [nameTask, descTask, stateTask, cateTask, docUser, numTask])
     }
-
 
 }
 

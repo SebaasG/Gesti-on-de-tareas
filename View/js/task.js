@@ -1,3 +1,4 @@
+//#region Declaración
 var tarjetas = document.getElementsByClassName('tarjet'); //se usa para el for
 
 let nameUser = localStorage.getItem('user');// Se usa para almacenar el nombre del usuario en localStorage
@@ -6,17 +7,13 @@ const btnCreate = document.getElementById('createTask');//Boton para crear una n
 
 const btnCerrar = document.getElementById('cerrarSesion');
 
+const botnmodal2 = document.getElementById('editButton')
+
 let contador = 0
+//#endregion
 
+//#region traer tareas
 
-async function getDocUser() {
-    const data = await fetch('http://localHost:1234/task/' + nameUser)
-    const datos = await data.json()
-    const docUser = datos[0].docUser
-    return docUser
-}
-
-//Funcion para guardar tareas
 async function getTask() {
     const docUser = await getDocUser();
     const response = await fetch('http://localHost:1234/task/get/' + docUser)
@@ -48,7 +45,9 @@ async function getTask() {
         });
     });
 };
+//#endregion
 
+//#region guardar Tareas
 async function postTask() {
     const datos = await getDocUser(); //Se la llama la funcion para saber el documento del usaurio con el nombre del mismo
     const nameTask = document.getElementById('document').value;
@@ -74,7 +73,9 @@ async function postTask() {
         console.log('Hubo un error al guardar la tarjeta :(' + error)
     }
 }
+//#endregion
 
+//#region creación de modales
 let div = document.createElement('div');
 div.innerHTML = `
 <div class="modal" id="miModal">
@@ -119,56 +120,32 @@ div.innerHTML = `
 </div>
 `;
 document.getElementById('modalcont').appendChild(div);
+//#endregion
 
-
-const botnmodal2 = document.getElementById('editButton')
-botnmodal2.addEventListener('click', () => {
-    const valorLocal = localStorage.getItem('num')
-    llenarModal2(valorLocal)
-})
-
+//#region llenar modales
 async function llenarModal(num) {
     const response = await fetch('http://localHost:1234/task/doc/' + num);
     const datos = await response.json();
     const cate = validarCate(datos[0].cateTask);
-
     const formDate = newDate(datos[0].dateStart, true);
     const states = state(datos[0].stateTask);
+
     document.getElementById('modalTitle').innerText = datos[0].nameTask;
+
     document.getElementById('modalContent').innerHTML = `
         <p>Descripción de tarea: ${datos[0].descTask}</p>
         <p>Fecha de creación: ${formDate}</p>
         <p>Estado: ${states}</p>
-        <p>Categoria: ${cate}</p>
-    `;
-
+        <p>Categoria: ${cate}</p> `;
 }
-
-function validarCate(cate) {
-
-    if (cate === 1) {
-        return "Personal"
-    } else if (cate === 2) {
-        return "Trabajo"
-    }
-}
-
-function state(state) {
-    if (state === 1) {
-        return "Creado"
-    } else {
-        return "Terminado"
-    }
-}
-
 
 async function llenarModal2(num) {
     const response = await fetch('http://localHost:1234/task/doc/' + num);
     const datos = await response.json();
     localStorage.setItem('cate', datos[0].cateTask)
     localStorage.setItem('state', datos[0].stateTask)
-
     document.getElementById('exampleModalLabel').innerText = `Tarea # ${datos[0].numTask}`
+
     document.getElementById('averprueba').innerHTML = `
         <label for="recipient-name"  class="col-form-label">Name task:</label> 
         <textarea class="form-control" id="message-text2">${datos[0].nameTask}</textarea>
@@ -193,16 +170,34 @@ async function llenarModal2(num) {
         <label class="form-check-label" for="exampleRadios2">
         Terminado
         </label>
-        </div>
-       `
+        </div> `
+
     LlenarCbo()
     llenarRadio()
+}
+//#endregion
 
+//#region Funciones de importancia secundaria
+function validarCate(cate) {
+
+    if (cate === 1) {
+        return "Personal"
+    } else if (cate === 2) {
+        return "Trabajo"
+    }
+}
+
+function state(state) {
+    if (state === 1) {
+        return "Creado"
+    } else {
+        return "Terminado"
+    }
 }
 
 function LlenarCbo() {
-    const valorCombo = localStorage.getItem('cate');
 
+    const valorCombo = localStorage.getItem('cate');
     const comboElement = document.getElementById("cboCate"); // Obtén el elemento del combobox por su ID
 
     if (valorCombo === '1') {
@@ -211,6 +206,7 @@ function LlenarCbo() {
         comboElement.selectedIndex = 2; // Selecciona la opción 2
     }
 }
+
 function llenarRadio() {
     const valorradio = localStorage.getItem('state')
 
@@ -223,7 +219,6 @@ function llenarRadio() {
         radioElement1.checked = true;
         radioElement.checked = false;
     }
-
 }
 
 function newDate(fecha, incluirHora = false) {
@@ -242,6 +237,12 @@ function newDate(fecha, incluirHora = false) {
     return formato.toLocaleString("es-CO", opciones);
 }
 
+async function getDocUser() {
+    const data = await fetch('http://localHost:1234/task/' + nameUser)
+    const datos = await data.json()
+    const docUser = datos[0].docUser
+    return docUser
+}
 
 function closeSession() {
     var nuevaPestana = window.open("../../index.html", "_blank");
@@ -249,8 +250,9 @@ function closeSession() {
         window.open('about:blank', '_self').close();
     }, 2)
 }
+//#endregion
 
-
+//#region Eventos
 document.addEventListener('DOMContentLoaded', function () {
     getTask()
 });
@@ -263,3 +265,8 @@ btnCerrar.addEventListener('click', () => {
     closeSession()
 })
 
+botnmodal2.addEventListener('click', () => {
+    const valorLocal = localStorage.getItem('num')
+    llenarModal2(valorLocal)
+})
+//#endregion
