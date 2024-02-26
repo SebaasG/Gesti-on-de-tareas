@@ -6,9 +6,8 @@ export class TaskController {
 
     getTask = async (req, res) => {
         const result = req.params.user
-        console.log(result)
         const taks = await this.TaskModel.getTask(result);
-        console.log(taks)
+      
         res.status(200).json(taks)
     }
 
@@ -36,6 +35,14 @@ export class TaskController {
             res.status(200).json(data)  
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    updateTask = async(req,res)=>{
+        try {
+            const result = req.body
+        } catch (error) {
+            
         }
     }
 }

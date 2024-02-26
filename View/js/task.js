@@ -24,10 +24,10 @@ async function getTask() {
 
     datos.forEach(datos => {
         contador = contador + 1
-        let valor ;
+        let valor;
         const formattedDate = newDate(datos.dateStart)
         const states = state(datos.stateTask);
-        const cate  = validarCate(datos.cateTask);
+        const cate = validarCate(datos.cateTask);
         let div = document.createElement('div');
         div.innerHTML = `
             <div id = 'tarjet${contador}' class="tarjet" data-bs-toggle="modal" data-bs-target="#miModal">
@@ -117,7 +117,8 @@ div.innerHTML = `
   </div>
 </div>
 </div>
-`; document.getElementById('modalcont').appendChild(div);
+`;
+document.getElementById('modalcont').appendChild(div);
 
 
 const botnmodal2 = document.getElementById('editButton')
@@ -129,8 +130,8 @@ botnmodal2.addEventListener('click', () => {
 async function llenarModal(num) {
     const response = await fetch('http://localHost:1234/task/doc/' + num);
     const datos = await response.json();
-    const cate  = validarCate(datos[0].cateTask);
-  
+    const cate = validarCate(datos[0].cateTask);
+
     const formDate = newDate(datos[0].dateStart, true);
     const states = state(datos[0].stateTask);
     document.getElementById('modalTitle').innerText = datos[0].nameTask;
@@ -143,11 +144,11 @@ async function llenarModal(num) {
 
 }
 
- function validarCate(cate){
+function validarCate(cate) {
 
-    if(cate === 1){
+    if (cate === 1) {
         return "Personal"
-    }else if(cate === 2){
+    } else if (cate === 2) {
         return "Trabajo"
     }
 }
@@ -164,9 +165,8 @@ function state(state) {
 async function llenarModal2(num) {
     const response = await fetch('http://localHost:1234/task/doc/' + num);
     const datos = await response.json();
-    
-   
-    localStorage.setItem('cate',datos[0].cateTask )
+    localStorage.setItem('cate', datos[0].cateTask)
+    localStorage.setItem('state', datos[0].stateTask)
 
     document.getElementById('exampleModalLabel').innerText = `Tarea # ${datos[0].numTask}`
     document.getElementById('averprueba').innerHTML = `
@@ -183,40 +183,48 @@ async function llenarModal2(num) {
         <br>
         <label for="recipient-name"  class="col-form-label">Status:</label> 
         <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+        <input class="form-check-input" type="radio" name="exampleRadios" id="radios1" value = 1>
         <label class="form-check-label" for="exampleRadios1">
         Pendiente
         </label>
         </div>
         <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="radios2"  value = 2>
         <label class="form-check-label" for="exampleRadios2">
         Terminado
         </label>
         </div>
-        <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
-        </div>`
-        LlenarCbo()
-      
+       `
+    LlenarCbo()
+    llenarRadio()
+
 }
 
 function LlenarCbo() {
     const valorCombo = localStorage.getItem('cate');
-    console.log(valorCombo);
-  
+
     const comboElement = document.getElementById("cboCate"); // Obtén el elemento del combobox por su ID
-  
+
     if (valorCombo === '1') {
-      alert("Entro aquí");
-      comboElement.selectedIndex = 1; // Selecciona la opción 1
+        comboElement.selectedIndex = 1; // Selecciona la opción 1
     } else {
-      comboElement.selectedIndex = 2; // Selecciona la opción 2
+        comboElement.selectedIndex = 2; // Selecciona la opción 2
     }
-  }
+}
+function llenarRadio() {
+    const valorradio = localStorage.getItem('state')
 
+    const radioElement = document.getElementById('radios1')
+    const radioElement1 = document.getElementById('radios2')
+    if (valorradio == 1) {
+        radioElement.checked = true;
+        radioElement1.checked = false;
+    } else {
+        radioElement1.checked = true;
+        radioElement.checked = false;
+    }
 
-
+}
 
 function newDate(fecha, incluirHora = false) {
     const formato = new Date(fecha);

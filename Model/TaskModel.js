@@ -44,6 +44,10 @@ export class TaskModel {
         return doc
     }
 
+    static async updateTask( nameTask, descTask, stateTask, cateTask, docUser, numTask){
+        const put = await conection.query('UPDATE task SET nameTask = ?,  descTask = ?, stateTask = ?, cateTask = ? WHERE docUser = ? and numTask = ?;',[nameTask,descTask,stateTask,cateTask, docUser,numTask])
+    }
+
 
 }
 
