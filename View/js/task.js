@@ -162,18 +162,26 @@ async function llenarModal2(num) {
 
     document.getElementById('exampleModalLabel').innerText = `Tarea # ${datos[0].numTask}`
     document.getElementById('averprueba').innerHTML = `
-        <label for="recipient-name" id= class="col-form-label">Name task:</label> 
+        <label for="recipient-name"  class="col-form-label">Name task:</label> 
     
         <textarea class="form-control" id="message-text2">${datos[0].nameTask}</textarea>
-        <label for="message-text" class="col-form-label">Description:</label>
+        <label for="recipient-name"  class="col-form-label">Description:</label> 
         <textarea class="form-control" id="message-text">${datos[0].descTask}</textarea>
+        <label for="recipient-name"  class="col-form-label">Category:</label> 
+        <select class="form-select" aria-label="Default select example">
+        <option selected>Select...</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+      <br>
 
         `
 }
 
 function state(state) {
     if (state === 1) {
-        return "Estado pendiente"
+        return "Creado"
     } else {
         return "Estado terminado"
     }
