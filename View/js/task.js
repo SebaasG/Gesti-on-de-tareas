@@ -26,6 +26,7 @@ async function getTask() {
 
     datos.forEach(datos => {
         contador = contador + 1
+        let valor = 2
         const formattedDate = newDate(datos.dateStart)
         let div = document.createElement('div');
         div.innerHTML = `
@@ -43,7 +44,6 @@ async function getTask() {
         document.querySelector('#tarjet' + contador).addEventListener('click', function () {
             // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
             const hola = localStorage.setItem('num', datos.numTask)
-            console.log
             llenarModal(datos.numTask)
         });
     });
@@ -123,14 +123,14 @@ div.innerHTML = `
   </div>
 </div>
 </div>
-`;
-document.getElementById('modalcont').appendChild(div);
+`; document.getElementById('modalcont').appendChild(div);
+
 
 const botnmodal2 = document.getElementById('editButton')
 botnmodal2.addEventListener('click', () => {
     const valorLocal = localStorage.getItem('num')
     llenarModal2(valorLocal)
-    console.log(valorLocal)
+
 })
 
 
@@ -138,17 +138,12 @@ botnmodal2.addEventListener('click', () => {
 async function llenarModal(num) {
     const response = await fetch('http://localHost:1234/task/doc/' + num);
     const datos = await response.json();
-
-    const formDate = newDate1(datos[0].dateStart);
+    let valor = 1;
+    const formDate = newDate(datos[0].dateStart, true);
     const states = state(datos[0].stateTask);
-    // Actualiza el título del modal
-    document.getElementById('modalTitle').innerText = datos[0].nameTask
-
-
-    // Puedes personalizar el contenido del modal como desees con los datos que recibes
+    document.getElementById('modalTitle').innerText = datos[0].nameTask;
     document.getElementById('modalContent').innerHTML = `
         <p>Descripción de tarea: ${datos[0].descTask}</p>
-        <p>Fecha de inicio: ${datos[0].cateTask}</p>
         <p>Fecha de creación: ${formDate}</p>
         <p>Estado: ${states}</p>
         <p>Categoria: ${datos[0].cateTask}</p>
@@ -158,60 +153,65 @@ async function llenarModal(num) {
 async function llenarModal2(num) {
     const response = await fetch('http://localHost:1234/task/doc/' + num);
     const datos = await response.json();
-    console.log(datos[0].nameTask);
+
 
     document.getElementById('exampleModalLabel').innerText = `Tarea # ${datos[0].numTask}`
     document.getElementById('averprueba').innerHTML = `
         <label for="recipient-name"  class="col-form-label">Name task:</label> 
-    
         <textarea class="form-control" id="message-text2">${datos[0].nameTask}</textarea>
         <label for="recipient-name"  class="col-form-label">Description:</label> 
         <textarea class="form-control" id="message-text">${datos[0].descTask}</textarea>
         <label for="recipient-name"  class="col-form-label">Category:</label> 
         <select class="form-select" aria-label="Default select example">
         <option selected>Select...</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-      <br>
-
-        `
+        <option value="1">Personal</option>
+        <option value="2">Trabajo</option>
+        </select>
+        <br>
+        <label for="recipient-name"  class="col-form-label">Status:</label> 
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+        <label class="form-check-label" for="exampleRadios1">
+        Pendiente
+        </label>
+        </div>
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+        <label class="form-check-label" for="exampleRadios2">
+        Terminado
+        </label>
+        </div>
+        <div class="form-check">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
+        </div>`
 }
 
 function state(state) {
     if (state === 1) {
         return "Creado"
     } else {
-        return "Estado terminado"
+        return "Terminado"
     }
 }
 
 //Esta función es solo para darle un formato de fecha que se trae desde MySQL
-function newDate(date) {
-    const fomat = new Date(date);
-    const formattedDate = fomat.toLocaleString("es-CO", {
+
+function newDate(fecha, incluirHora = false) {
+    const formato = new Date(fecha);
+    const opciones = {
         timeZone: "America/Bogota",
         day: "2-digit",
         month: "2-digit",
         year: "numeric"
-    });
-    return formattedDate
+    };
+    if (incluirHora) {
+        opciones.hour = '2-digit';
+        opciones.minute = '2-digit';
+        opciones.second = '2-digit';
+    }
+    return formato.toLocaleString("es-CO", opciones);
 }
 
-function newDate1(date) {
-    const fomat = new Date(date);
-    const formattedDate = fomat.toLocaleString("es-CO", {
-        timeZone: "America/Bogota",
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-    });
-    return formattedDate
-}
 
 function closeSession() {
     var nuevaPestana = window.open("../../index.html", "_blank");
