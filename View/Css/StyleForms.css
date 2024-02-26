@@ -1,45 +1,49 @@
 
 html {
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-    
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  
 }
 
 h1{
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  
 }
 
 .head  {
-    display: flex;
-    justify-content: center;  
-    width: auto;
-    height: auto;
-    margin: 50px 10px 10px
+  display: flex;
+  justify-content: center;  
+  width: auto;
+  height: auto;
+  margin: 50px 10px 10px
 }
 
 .elemento {
-    align-items: center;
-    height: 78vh;
-    background-color: white;
-    width: 110vh;
-    overflow: auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
-  
-  .tarjet {
-    background-color: #f0f0f0;
-    padding: 20px;
-    box-sizing: border-box;
-    border-radius: 10px;
-    color: #00276c;
-    margin: 20px;
-    border: 1px solid blue;
-  
+  align-items: center;
+  height: 78vh;
+  background-color: white;
+  width: 110vh;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+
+.tarjet {
+  background-color: #f0f0f0;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: #00276c;
+  margin: 20px;
+  border: 1px solid blue;
+
+}
+#pruebeitas{
+background-color: #00276c;
 }
 
 
@@ -53,48 +57,76 @@ grid-row: auto;
 }
 
 #botonCreate:hover{
-    background-color:#96b3ff;
-    color: white;
+  background-color:#96b3ff;
+  color: white;
 }
 
 .elemento::-webkit-scrollbar {
-    width: 12px; /* Ancho de la barra de desplazamiento */
-  }
-  
-  .elemento::-webkit-scrollbar-thumb {
-    background-color: #888; /* Color del "pulgar" de la barra de desplazamiento */
-    border-radius: 10px; /* Radio de la esquina del "pulgar" */
-  }
-  
-  .elemento::-webkit-scrollbar-track {
-    background-color: #ccc; /* Color de la pista de la barra de desplazamiento */
-  }
+  width: 12px; /* Ancho de la barra de desplazamiento */
+}
+
+.elemento::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color del "pulgar" de la barra de desplazamiento */
+  border-radius: 10px; /* Radio de la esquina del "pulgar" */
+}
+
+.elemento::-webkit-scrollbar-track {
+  background-color: #ccc; /* Color de la pista de la barra de desplazamiento */
+}
 
 
-  .cajita{
-    display: flex;
-    justify-content: space-between; 
-    border: solid black;
-    margin-right: 2%;
-    width: 80vh;
-  }
+.cajita{
+  display: flex;
+  justify-content: space-between; 
+  border: solid black;
+  margin-right: 2%;
+  width: 80vh;
+}
 
-  .btnp button{
-      background-color: #f0f0f0;
-      padding: 20px;
-      box-sizing: border-box;
-      border-radius: 10px;
-      color: #00276c;
-      padding: 20px;
-      margin: 20px;
-      border: solid blue ;
+.btnp button{
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    color: #00276c;
+    padding: 20px;
+    margin: 20px;
+    border: solid blue ;
 height:30vh ;
-  width: 30vh;
+width: 30vh;
 }
 .contenido {
-  overflow: hidden; /* Oculta el contenido que se desborda */
-  
-  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+overflow: hidden; /* Oculta el contenido que se desborda */
 
-
+white-space: nowrap; /* Evita que el texto se divida en varias líneas */
 }
+/* .taskTitleInput {
+
+text-decoration: none;
+flex-grow: 1;
+border: solid black;
+
+} */
+
+/* .modal-header {
+  background-color: #00276c;
+  border: solid black;
+  display: flex;
+  flex-grow: 1;
+  height: 10vh;
+  flex-wrap: wrap;
+} */
+
+.modal-header input {
+  width: 150%; /* Ocupa todo el ancho horizontal */
+  height: 5vh;
+  padding: 5px; /* Puedes ajustar el padding según tus preferencias */
+  margin: 0px; /* Elimina márgenes innecesarios */
+  box-sizing: border-box; /* Considera box-sizing para evitar problemas con el padding */
+  overflow: visible; /* Permite el overflow en caso de texto muy largo */
+  /* white-space: pre-wrap;  */ /* No es necesario en este caso */
+}
+
+
+
+

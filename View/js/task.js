@@ -42,6 +42,7 @@ async function getTask() {
         // Añadir evento click para cada tarjeta creada
         document.querySelector('#tarjet' + contador).addEventListener('click', function () {
             // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
+            localStorage.setItem('num', datos.numTask)
             llenarModal(datos.numTask)
         });
     });
@@ -52,7 +53,7 @@ async function postTask() {
     const nameTask = document.getElementById('document').value;
     const descTask = document.getElementById('description').value;
     const cateTask = document.getElementById('category').value;
-     
+
     try {
         await fetch('http://localHost:1234/task/save', {
             method: 'POST',
@@ -69,49 +70,107 @@ async function postTask() {
         });
         location.reload()//Actualizamos el formulario para que cargue de una vez la nueva tarea
     } catch (error) {
-        console.log('Hubo un error al guardar la tarjeta :('+ error)
+        console.log('Hubo un error al guardar la tarjeta :(' + error)
     }
-    }
+}
 
 // 1. Crea el modal una sola vez, fuera de la función
 let div = document.createElement('div');
 div.innerHTML = `
-    <div class="modal" id="miModal"> 
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 id="modalTitle"></h4> <br>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="modalContent"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
+<div class="modal" id="miModal">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 id="modalTitle"></h4> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <div id="modalContent"></div> </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-danger" id="editButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+  
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+     
+        <div class="mb-3" id = "averprueba">
+          
+     
         </div>
-    </div>`;
+        <div class="mb-3">
+         
+         
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button" id = "pruebamoda" class="btn btn-primary">
+      Save changes</button>
+    </div>
+  </div>
+</div>
+</div>
+`;
 document.getElementById('modalcont').appendChild(div);
+const valorLocal = localStorage.getItem('num')
+const botnmodal2 =document.getElementById('pruebamoda')
+botnmodal2.addEventListener('click',()=>{
+
+    alert('Se presiono');
+    llenarModal2(valorLocal)
+    console.log(valorLocal)
+})
+
 
 
 async function llenarModal(num) {
     const response = await fetch('http://localHost:1234/task/doc/' + num);
     const datos = await response.json();
     console.log(datos[0].nameTask);
+    const formDate = newDate1(datos[0].dateStart);
 
     // Actualiza el título del modal
-    document.getElementById('modalTitle').innerText = datos[0].nameTask;
+    document.getElementById('modalTitle').innerText = datos[0].nameTask
+
 
     // Puedes personalizar el contenido del modal como desees con los datos que recibes
     document.getElementById('modalContent').innerHTML = `
-        <p>Descripción: ${datos[0].descTask}</p>
+        <p>Descripción de tarea: ${datos[0].descTask}</p>
         <p>Fecha de inicio: ${datos[0].cateTask}</p>
-        <p>Fecha de incio: ${datos[0].dateStart}</p>
+        <p>Fecha de creación: ${formDate}</p>
     `;
 
+
+}
+async function llenarModal2(num) {
+    const response = await fetch('http://localHost:1234/task/doc/' + num);
+    const datos = await response.json();
+    console.log(datos[0].nameTask);
+
+    document.getElementById('exampleModalLabel').innerText = `Tarea # ${datos[0].numTask}`
+        document.getElementById('averprueba').innerHTML = `
+        <label for="recipient-name" id= class="col-form-label">Name task:</label> 
+     
+        <textarea class="form-control" id="message-text2">${datos[0].nameTask}</textarea>
+        <label for="message-text" class="col-form-label">Description:</label>
+        <textarea class="form-control" id="message-text">${datos[0].descTask}</textarea>
+        `
+
+ // <p>Descripción de tarea: ${datos[0].descTask}</p>
+    // <p>Fecha de inicio: ${datos[0].cateTask}</p>
+    // <p>Fecha de creación: ${formDate}</p>
 }
 
 //Esta función es solo para darle un formato de fecha que se trae desde MySQL
@@ -121,7 +180,21 @@ function newDate(date) {
         timeZone: "America/Bogota",
         day: "2-digit",
         month: "2-digit",
+        year: "numeric"
+    });
+    return formattedDate
+}
+
+function newDate1(date) {
+    const fomat = new Date(date);
+    const formattedDate = fomat.toLocaleString("es-CO", {
+        timeZone: "America/Bogota",
+        day: "2-digit",
+        month: "2-digit",
         year: "numeric",
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
     });
     return formattedDate
 }
