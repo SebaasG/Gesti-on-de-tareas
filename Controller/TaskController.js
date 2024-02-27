@@ -6,12 +6,12 @@ export class TaskController {
     getTask = async (req, res) => {
         try {
             const user = req.params.user
-        const taks = await this.TaskModel.getTask(user);
-        res.status(200).json(taks)
+            const taks = await this.TaskModel.getTask(user);
+            res.status(200).json(taks)
         } catch (error) {
             console.log(error)
         }
-        
+
     }
 
     getTaskById = async (req, res) => {
@@ -22,7 +22,7 @@ export class TaskController {
         } catch (error) {
             console.log(error)
         }
-     
+
     }
 
     createTask = async (req, res) => {
@@ -36,16 +36,21 @@ export class TaskController {
     }
 
     updateTask = async (req, res) => {
-          try {
-            const idTask = req.params.id
+        try {
             const result = req.body
-            const updateTask = await this.TaskModel.updateTask(  result.numTask, result.docUser, result.nameTask, result.descTask, result.stateTask, result.cateTask, result.idTask );
-            res.status(201).json({ message: 'Se actualizo: ', data: result })
+            console.log(result.idTask,result.nameTask, result.descTask, result.stateTask, result.cateTask)
+            const updateTask = await this.TaskModel.updateTask(result.idTask, result.nameTask, result.descTask, result.stateTask, result.cateTask);
+            if (updateTask == true) {
+                res.status(201).json({ message: 'Se actualizo: ', data: result })
+            } else{
+                console.log("mal ahí chacho te falta mente")
+            }
+
         } catch (error) {
             console.log(error)
         }
     }
-
+    
     findDoc = async (req, res) => {
         try {
             const user = req.params.user;
@@ -56,7 +61,7 @@ export class TaskController {
         }
     }
 
-    findNumTask = async (req,res) =>{
+    findNumTask = async (req, res) => {
         try {
             const num = req.params.num;
             const data = await this.TaskModel.getnumTask(num)

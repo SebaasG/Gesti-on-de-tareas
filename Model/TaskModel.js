@@ -52,12 +52,23 @@ export class TaskModel {
         return num
     }
 
-    static async updateTask(nameTask, descTask, stateTask, cateTask, docUser, idTask) {
-        const put = await conection.query('UPDATE task SET numTask = ?, docUser= ?,nameTask = ?,  descTask = ?, stateTask = ?, cateTask = ? WHERE BIN_TO_UUID(idTask) = ?;', [nameTask, descTask, stateTask, cateTask, docUser, idTask])
-        if (put) {
-            return true
+    static async updateTask(idTask, nameTask, descTask, stateTask, cateTask) {
+        try {
+
+            console.log(idTask, nameTask, descTask ,stateTask, cateTask)
+            const put = await conection.execute('CALL UpdateTask(UUID_TO_BIN(?), ?, ?, ?, ?)', [idTask, nameTask, descTask, stateTask, cateTask]); 
+            
+            if (put[0].affectedRows > 0) { 
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.log(error);
+            return false;
         }
-        return false
     }
+    
+    
 }
+
 

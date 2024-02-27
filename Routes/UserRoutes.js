@@ -21,6 +21,6 @@ export const createTaskRoutes = ({ TaskModel }) => {
     taskRoutes.get('/:user' ,taskController.findDoc)
     taskRoutes.get('/doc/:id', taskController.getTaskById)
     taskRoutes.get('/num/:num', taskController.findNumTask)
-    taskRoutes.put('/update/:id', taskController.updateTask)
+    taskRoutes.put('/update', taskController.updateTask)
     return taskRoutes
 }

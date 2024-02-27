@@ -8,8 +8,6 @@ const btnCreate = document.getElementById('createTask');//Boton para crear una n
 
 const btnCerrar = document.getElementById('cerrarSesion');
 
-
-
 let contador = 0
 //#endregion
 
@@ -42,7 +40,7 @@ async function getTask() {
         document.querySelector('#tarjet' + contador).addEventListener('click', function () {
             // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
             const hola = localStorage.setItem('task', datos.id)
-            llenarModal( datos.id)
+            llenarModal(datos.id)
         });
     });
 };
@@ -52,7 +50,7 @@ async function getTask() {
 async function postTask() {
     const datos = await getDocUser();
     const numTasks = await numTask() //Se la llama la funcion para saber el documento del usaurio con el nombre del mismo
-console.log(numTasks+"function")
+
     const nameTask = document.getElementById('document').value;
     const descTask = document.getElementById('description').value;
     const cateTask = document.getElementById('category').value;
@@ -64,7 +62,7 @@ console.log(numTasks+"function")
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                "numTask": numTasks ,
+                "numTask": numTasks,
                 "docUser": datos,
                 "nameTask": nameTask,
                 "descTask": descTask,
@@ -86,13 +84,13 @@ div.innerHTML = `
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 id="modalTitle"></h4> <button type="button" class="btn-close" data-bs-dismiss="modal" aria    -label="Close"></button>
+      <h4 id="modalTitle"></h4> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
       <div id="modalContent"></div> </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-danger" id="editButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+      <button type="button" class="btn btn-primary" id="editButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
   
     </div>
   </div>
@@ -129,19 +127,33 @@ document.getElementById('modalcont').appendChild(div);
 //#region Actualizar Tareas
 
 async function updateTask() {
-const response = await fetch('http://localHost:1234/task/update/',{
-method:'PUT',
-headers:{
-    "Content-Type": "application/json"
-}, body: JSON.stringify({
-    "docUser": datos,
-    "nameTask": nameTask,
-    "descTask": descTask,
-    "stateTask": 1,
-    "cateTask": cateTask
-})
-})
-const datos =  await response.json();
+
+    const nameTask = document.getElementById('nameTaskM2').value;
+    const descTask = document.getElementById('descTaskM2').value;
+    const stateTask = document.getElementById('radios1');
+    const comboElement = document.getElementById("cboCate").value;
+    const valorLocal = localStorage.getItem('task')
+    let resultState;
+
+    if (stateTask.checked) {
+        resultState = 1;
+    } else {
+        resultState = 2;
+    }
+
+        await fetch('http://localHost:1234/task/update', {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json"
+        }, body: JSON.stringify({
+            "idTask": valorLocal,
+            "nameTask": nameTask,
+            "descTask": descTask,
+            "stateTask": resultState,
+            "cateTask": comboElement
+        })
+    })
+location.reload()
 }
 //#endregion
 
@@ -156,9 +168,13 @@ async function llenarModal(doc) {
     document.getElementById('modalTitle').innerText = datos[0].nameTask;
 
     document.getElementById('modalContent').innerHTML = `
+        <label  class="col-form-label">Description task:</label> 
         <p>Descripción de tarea: ${datos[0].descTask}</p>
+        <label  class="col-form-label">Date:</label> 
         <p>Fecha de creación: ${formDate}</p>
+        <label  class="col-form-label">State:</label> 
         <p>Estado: ${states}</p>
+        <label  class="col-form-label">Category:</label> 
         <p>Categoria: ${cate}</p> `;
 }
 
@@ -171,9 +187,9 @@ async function llenarModal2(num) {
 
     document.getElementById('averprueba').innerHTML = `
         <label for="recipient-name"  class="col-form-label">Name task:</label> 
-        <textarea class="form-control" id="message-text2">${datos[0].nameTask}</textarea>
+        <textarea class="form-control" id="nameTaskM2">${datos[0].nameTask}</textarea>
         <label for="recipient-name"  class="col-form-label">Description:</label> 
-        <textarea class="form-control" id="message-text">${datos[0].descTask}</textarea>
+        <textarea class="form-control" id="descTaskM2">${datos[0].descTask}</textarea>
         <label for="recipient-name"  class="col-form-label">Category:</label> 
         <select class="form-select" id = "cboCate" aria-label="Default select example">
         <option selected>Select...</option>
@@ -274,11 +290,11 @@ function closeSession() {
     }, 2)
 }
 
-async function numTask(){
+async function numTask() {
     const docUser = await getDocUser();
-    const data = await fetch('http://localHost:1234/task/num/'+ docUser)
+    const data = await fetch('http://localHost:1234/task/num/' + docUser)
     const datos = await data.json()
-    const num = datos[0].numTaskUser +1
+    const num = datos[0].numTaskUser + 1
     return num
 }
 //#endregion
@@ -299,7 +315,12 @@ btnCerrar.addEventListener('click', () => {
 const botnmodal2 = document.getElementById('editButton')
 botnmodal2.addEventListener('click', () => {
     const valorLocal = localStorage.getItem('task')
-    console.log(valorLocal)
+
     llenarModal2(valorLocal)
 });
 //#endregion
+
+const pruebamoda = document.getElementById('pruebamoda')
+pruebamoda.addEventListener('click', () => {
+    updateTask()
+})

@@ -36,15 +36,14 @@ Content-Type: application/json
 GET http://localHost:1234/task/num/1052382113
 
 ###
-PATCH  http://localHost:1234/task/update/a79ed4e5-d584-11ee-aa49-ec8eb55104fd
+PUT http://localHost:1234/task/update
 Content-Type: application/json
 
 {
-    "numTask": 1,
-    "docUser": 1052382112,
-    "nameTask": "al ??",
+    "idTask":"489ee854-d59b-11ee-aa49-ec8eb55104fd",
+    "nameTask": "Actualizo desde aca",
     "descTask": "si mi chamos",
     "stateTask": 1,
-    "cateTask": 2,
-    "idTask":"a79ed4e5-d584-11ee-aa49-ec8eb55104fd"
+    "cateTask": 2
 }
+
