@@ -169,13 +169,13 @@ async function llenarModal(doc) {
 
     document.getElementById('modalContent').innerHTML = `
         <label  class="col-form-label">Description task:</label> 
-        <p>Descripción de tarea: ${datos[0].descTask}</p>
+        <p> ${datos[0].descTask}</p>
         <label  class="col-form-label">Date:</label> 
-        <p>Fecha de creación: ${formDate}</p>
+        <p> ${formDate}</p>
         <label  class="col-form-label">State:</label> 
-        <p>Estado: ${states}</p>
+        <p> ${states}</p>
         <label  class="col-form-label">Category:</label> 
-        <p>Categoria: ${cate}</p> `;
+        <p> ${cate}</p> `;
 }
 
 async function llenarModal2(num) {
