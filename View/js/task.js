@@ -1,7 +1,8 @@
+
 //#region DeclaracióneditButton
 var tarjetas = document.getElementsByClassName('tarjet'); //se usa para el for
 
-let nameUser = localStorage.getItem('user');// Se usa para almacenar el nombre del usuario en localStorage
+let nameUser = localStorage.getItem('user');// Se usa para 
 
 const btnCreate = document.getElementById('createTask');//Boton para crear una nueva tarea
 
@@ -40,8 +41,8 @@ async function getTask() {
         // Añadir evento click para cada tarjeta creada
         document.querySelector('#tarjet' + contador).addEventListener('click', function () {
             // aquí puedes ejecutar una función cuando se hace clic en la tarjeta
-            const hola = localStorage.setItem('num', datos.numTask)
-            llenarModal(datos.numTask)
+            const hola = localStorage.setItem('task', datos.id)
+            llenarModal( datos.id)
         });
     });
 };
@@ -49,7 +50,9 @@ async function getTask() {
 
 //#region guardar Tareas
 async function postTask() {
-    const datos = await getDocUser(); //Se la llama la funcion para saber el documento del usaurio con el nombre del mismo
+    const datos = await getDocUser();
+    const numTasks = await numTask() //Se la llama la funcion para saber el documento del usaurio con el nombre del mismo
+console.log(numTasks+"function")
     const nameTask = document.getElementById('document').value;
     const descTask = document.getElementById('description').value;
     const cateTask = document.getElementById('category').value;
@@ -61,6 +64,7 @@ async function postTask() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                "numTask": numTasks ,
                 "docUser": datos,
                 "nameTask": nameTask,
                 "descTask": descTask,
@@ -125,13 +129,25 @@ document.getElementById('modalcont').appendChild(div);
 //#region Actualizar Tareas
 
 async function updateTask() {
-
+const response = await fetch('http://localHost:1234/task/update/',{
+method:'PUT',
+headers:{
+    "Content-Type": "application/json"
+}, body: JSON.stringify({
+    "docUser": datos,
+    "nameTask": nameTask,
+    "descTask": descTask,
+    "stateTask": 1,
+    "cateTask": cateTask
+})
+})
+const datos =  await response.json();
 }
 //#endregion
 
 //#region llenar modales
-async function llenarModal(num) {
-    const response = await fetch('http://localHost:1234/task/doc/' + num);
+async function llenarModal(doc) {
+    const response = await fetch('http://localHost:1234/task/doc/' + doc);
     const datos = await response.json();
     const cate = validarCate(datos[0].cateTask);
     const formDate = newDate(datos[0].dateStart, true);
@@ -196,7 +212,7 @@ function validarCate(cate) {
 
 function state(state) {
     if (state === 1) {
-        return "Creado"
+        return "Pendiente"
     } else {
         return "Terminado"
     }
@@ -257,11 +273,20 @@ function closeSession() {
         window.open('about:blank', '_self').close();
     }, 2)
 }
+
+async function numTask(){
+    const docUser = await getDocUser();
+    const data = await fetch('http://localHost:1234/task/num/'+ docUser)
+    const datos = await data.json()
+    const num = datos[0].numTaskUser +1
+    return num
+}
 //#endregion
 
 //#region Eventos
 document.addEventListener('DOMContentLoaded', function () {
     getTask()
+    localStorage.setItem('numTask', numTask())
 });
 
 btnCreate.addEventListener('click', () => {
@@ -273,7 +298,7 @@ btnCerrar.addEventListener('click', () => {
 });
 const botnmodal2 = document.getElementById('editButton')
 botnmodal2.addEventListener('click', () => {
-    const valorLocal = localStorage.getItem('num')
+    const valorLocal = localStorage.getItem('task')
     console.log(valorLocal)
     llenarModal2(valorLocal)
 });

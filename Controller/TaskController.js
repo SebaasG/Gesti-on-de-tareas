@@ -4,22 +4,43 @@ export class TaskController {
     }
 
     getTask = async (req, res) => {
-        const result = req.params.user
-        const taks = await this.TaskModel.getTask(result);
+        try {
+            const user = req.params.user
+        const taks = await this.TaskModel.getTask(user);
         res.status(200).json(taks)
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
 
     getTaskById = async (req, res) => {
-        const result = req.params.id
-        const search = await this.TaskModel.getByid(result);
-        res.status(302).json(search)
+        try {
+            const task = req.params.id
+            const search = await this.TaskModel.getByid(task);
+            res.status(302).json(search)
+        } catch (error) {
+            console.log(error)
+        }
+     
     }
 
     createTask = async (req, res) => {
         try {
             const result = req.body
-            const postTask = await this.TaskModel.postTask(result.docUser, result.nameTask, result.descTask, result.stateTask, result.cateTask);
+            const postTask = await this.TaskModel.postTask(result.numTask, result.docUser, result.nameTask, result.descTask, result.stateTask, result.cateTask);
             res.status(201).json({ message: 'Se creo la tarea: ', data: result })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    updateTask = async (req, res) => {
+          try {
+            const idTask = req.params.id
+            const result = req.body
+            const updateTask = await this.TaskModel.updateTask(  result.numTask, result.docUser, result.nameTask, result.descTask, result.stateTask, result.cateTask, result.idTask );
+            res.status(201).json({ message: 'Se actualizo: ', data: result })
         } catch (error) {
             console.log(error)
         }
@@ -35,10 +56,14 @@ export class TaskController {
         }
     }
 
-    updateTask = async (req, res) => {
+    findNumTask = async (req,res) =>{
         try {
-            const result = req.body
+            const num = req.params.num;
+            const data = await this.TaskModel.getnumTask(num)
+            res.status(200).json(data)
         } catch (error) {
+            console.log(error)
         }
     }
+
 }

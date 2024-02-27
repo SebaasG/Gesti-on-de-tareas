@@ -36,4 +36,13 @@ export class userController {
             res.status(500).json('Error al crear su usuario')
         }
     }
+
+    updateUser = async (req, res) => {
+        try {
+            const{nameTask, descTask, stateTask, cateTask} = req.body
+        } catch (error) {
+
+        }
+    }
+
 }

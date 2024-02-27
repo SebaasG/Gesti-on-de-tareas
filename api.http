@@ -11,9 +11,11 @@ Content-Type: application/json
     }   
 
 ###
-GET http://localHost:1234/task/get/Daniel
+GET http://localHost:1234/task/get/1052382113
+
+
 ###
-GET http://localHost:1234/task/doc/1
+GET http://localHost:1234/task/doc/d5bc02a1-d4de-11ee-aa49-ec8eb55104fd
 ###
 GET http://localHost:1234/task/Sebastian
 
@@ -22,9 +24,27 @@ POST http://localHost:1234/task/save
 Content-Type: application/json
 
 {
+    "numTask": 1,
     "docUser": 1052382113,
     "nameTask": "al ??",
     "descTask": "si mi chamos",
     "stateTask": 1,
-    "cateTask": "personal"
+    "cateTask": 2
+}
+
+###
+GET http://localHost:1234/task/num/1052382113
+
+###
+PATCH  http://localHost:1234/task/update/a79ed4e5-d584-11ee-aa49-ec8eb55104fd
+Content-Type: application/json
+
+{
+    "numTask": 1,
+    "docUser": 1052382112,
+    "nameTask": "al ??",
+    "descTask": "si mi chamos",
+    "stateTask": 1,
+    "cateTask": 2,
+    "idTask":"a79ed4e5-d584-11ee-aa49-ec8eb55104fd"
 }
