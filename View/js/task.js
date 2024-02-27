@@ -124,7 +124,9 @@ document.getElementById('modalcont').appendChild(div);
 
 //#region Actualizar Tareas
 
+async function updateTask() {
 
+}
 //#endregion
 
 //#region llenar modales

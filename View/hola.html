@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./Css/StyleForms.css">
-
-    <!-- Última versión de Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 
     <title>Gestor de tareas</title>
@@ -14,37 +12,33 @@
 
 <body>
     <h1>Gestor de tareas</h1>
-   
+
     <div class="head">
-<button id="cerrarSesion">cerrar</button>
+        <button id="cerrarSesion">cerrar</button>
         <div class="cajita">
 
-<div id="nameinp" class="cajasinput">
-    <label for="document">Name task: </label>
-    <input type="text" name="document" id="document">
-    </div>
-    <div id="descinp" class="cajasinput">
-        <label for="description">Description: </label>
-        <input type="text" name="description" id="description">
-        </div>
+            <div id="nameinp" class="cajasinput">
+                <label for="document">Name task: </label>
+                <input type="text" name="document" id="document">
+            </div>
+            <div id="descinp" class="cajasinput">
+                <label for="description">Description: </label>
+                <input type="text" name="description" id="description">
+            </div>
 
-        <div id="cateinp" class="cajasinput">
-            <select class="form-select" id = "category" aria-label="Default select example">
-                <option selected>Select...</option>
-                <option value="1">Personal</option>
-                <option value="2">Trabajo</option>
+            <div id="cateinp" class="cajasinput">
+                <select class="form-select" id="category" aria-label="Default select example">
+                    <option selected>Select...</option>
+                    <option value="1">Personal</option>
+                    <option value="2">Trabajo</option>
                 </select>
             </div>
 
             <input type="submit" value="Send" id="createTask">
-
-
         </div>
- 
+
         <div id="container" class="elemento">
-        
         </div>
-        
 
         <div id="modalcont"></div>
         <script src="../View/js/task.js"></script>

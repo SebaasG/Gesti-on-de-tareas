@@ -5,16 +5,13 @@ export class userController {
 
     verifySession = async (req, res) => {
         try {
-
             const user = req.params.user;
             const pass = req.params.pass;
             const userfinally = await this.usuarioModel.verifySession(user, pass)
-
             if (userfinally === 2) {
                 res.status(400).json('Usuario o contraseña incorrectos')
             } else
                 res.status(200).json('bienvenido')
-
         } catch (error) {
             console.log('Error' + error)
         }
@@ -22,10 +19,8 @@ export class userController {
 
     registerUser = async (req, res) => {
         try {
-
             const { docUser, nameUser, passUser } = req.body;//Esto nos sirve para extraer solo el body de cada uno
             const newUser = await this.usuarioModel.registerUser(docUser, nameUser, passUser)
-
             this.handleUser(newUser, res)
         } catch (error) {
             res.status(500).json('Erro al crear el usuario')
@@ -41,5 +36,4 @@ export class userController {
             res.status(500).json('Error al crear su usuario')
         }
     }
-
 }

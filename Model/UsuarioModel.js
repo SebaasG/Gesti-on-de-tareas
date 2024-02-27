@@ -13,17 +13,15 @@ const conection = await mysql.createConnection(confi)
 
 export class usuarioModel {
 
- 
-
-    static async encrypt( passUser ) {
+    static async encrypt(passUser) {
         const hash = crypto.createHash('sha3-256'); // 
         hash.update(passUser);
         return hash.digest('hex');
     }
 
-    static async verifySession( user , pass ) {
+    static async verifySession(user, pass) {
         try {
-            const passhash = await this.encrypt( pass )
+            const passhash = await this.encrypt(pass)
             const [rows] = await conection.execute('CALL verifyUser(?, ?)', [user, passhash]);
             const result = rows[0][0].result;
             if (result === 1) {
@@ -36,7 +34,7 @@ export class usuarioModel {
         }
     }
 
-    static async validateUser( docUser ,  nameUser ) {
+    static async validateUser(docUser, nameUser) {
         try {
             const [rows] = await conection.execute('CALL validateUser(?, ?)', [docUser, nameUser]);
             const ammya = rows[0][0].result;
