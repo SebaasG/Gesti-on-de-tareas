@@ -71,4 +71,17 @@ export class TaskController {
         }
     }
 
+    deleteTask = async (req,res) =>{
+        try {
+            const id = req.body
+            const data = await this.TaskModel.deleteTask(id.idTask)
+            if(data === true){
+                res.status(200).json(data)
+            }
+            res.status(404).json('Te falta mente chachito :)')
+        } catch (error) {
+            
+        }
+    }
+
 }

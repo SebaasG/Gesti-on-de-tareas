@@ -89,9 +89,9 @@ div.innerHTML = `
     <div class="modal-body">
       <div id="modalContent"></div> </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary" id="editButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
-  
+     
+      <button type="button" class="btn btn-outline-primary" id="editButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+      <button type="button" id = "deleteModal" class= "btn btn-outline-danger" >delete</button>
     </div>
   </div>
 </div>
@@ -156,7 +156,24 @@ async function updateTask() {
 location.reload()
 }
 //#endregion
+async function deleteTask(){
+    const id = localStorage.getItem('task')
 
+    const data = await fetch('http://localHost:1234/task/delete',{
+        method:"DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },body: JSON.stringify({
+            "idTask": id,
+        })
+    })
+    if(data){
+        console.log('Eliminado con éxito')
+        location.reload()
+    }
+    console.log('ALgo pasa ahi cachito')
+
+}
 //#region llenar modales
 async function llenarModal(doc) {
     const response = await fetch('http://localHost:1234/task/doc/' + doc);
@@ -297,6 +314,9 @@ async function numTask() {
     const num = datos[0].numTaskUser + 1
     return num
 }
+
+
+
 //#endregion
 
 //#region Eventos
@@ -323,4 +343,9 @@ botnmodal2.addEventListener('click', () => {
 const pruebamoda = document.getElementById('pruebamoda')
 pruebamoda.addEventListener('click', () => {
     updateTask()
+})
+
+const deleteModal = document.getElementById('deleteModal')
+deleteModal.addEventListener('click', ()=>{
+    deleteTask()
 })

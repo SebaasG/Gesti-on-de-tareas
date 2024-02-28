@@ -67,6 +67,15 @@ export class TaskModel {
             return false;
         }
     }
+
+    static async deleteTask(idTask){
+
+        const dele = await conection.query('delete from task where BIN_TO_UUID(idTask)  = ? ', [idTask])
+        if(dele){
+            return true
+        }
+        return false
+    }
     
     
 }

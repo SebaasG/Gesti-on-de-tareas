@@ -47,3 +47,10 @@ Content-Type: application/json
     "cateTask": 2
 }
 
+###
+DELETE http://localHost:1234/task/delete
+Content-Type: application/json
+
+{
+    "idTask": "34098466-d5b4-11ee-aa49-ec8eb55104fd"
+}
