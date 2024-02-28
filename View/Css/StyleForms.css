@@ -4,7 +4,8 @@ html {
   padding: 0px;
 }
 
-h1, h3 {
+h1,
+h3 {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 30px;
@@ -30,10 +31,11 @@ h1, h3 {
   border: solid;
 }
 
-.d-flex{
+.d-flex {
   display: flex;
-  
+
 }
+
 .tarjet {
   background-color: white;
   padding: 20px;
@@ -45,9 +47,10 @@ h1, h3 {
   /* border: 1px solid blue; */
   box-shadow: 0 5px 10px rgba(0, 0, 57, 0.5);
 }
+
 .tarjet:hover {
- background-color: #f0f0f0;
- box-shadow: 0px 15px 15px rgba(0, 0, 57, 0.5);
+  background-color: #f0f0f0;
+  box-shadow: 0px 15px 15px rgba(0, 0, 57, 0.5);
 }
 
 #pruebeitas {
@@ -82,9 +85,7 @@ h1, h3 {
 
 
 .cajita {
-
-
- background: linear-gradient( #ffff); 
+  background: linear-gradient(#ffff);
   margin-right: 2%;
   width: 65vh;
 }
@@ -108,7 +109,6 @@ textarea {
 
 }
 
-select {}
 
 .btnp button {
   background-color: #f0f0f0;
@@ -141,9 +141,10 @@ select {}
   border: none;
 
 }
+
 #createTask:hover {
 
-  background-color:#96b3ff;
+  background-color: #96b3ff;
   color: white;
 }
 
