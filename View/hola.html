@@ -11,21 +11,24 @@
 </head>
 
 <body>
-    <h1>Gestor de tareas</h1>
+
+    <h1 style="margin-top: 2%;">Gestor de tareas</h1>
 
     <div class="head">
-        <button id="cerrarSesion">cerrar</button>
+      
         <div class="cajita">
-
-            <div id="nameinp" class="cajasinput">
-                <label for="document">Name task: </label>
+            <h3>New task</h3>
+          
+            <div id="nameinp" class="cajasinput"> 
+               <h5>Name Task:</h5>
                 <input type="text" name="document" id="document">
-            </div><br>
-            <div id="descinp" class="cajasinput">
-                <label for="description">Description: </label>
-                <input type="text" name="description" id="description">
             </div>
-<br>
+            <div id="descinp" class="cajasinput">
+                <br>
+                <h5>Description:</h5>
+                <textarea class="form-control" id="description"></textarea>
+            </div>
+            <br>
             <div id="cateinp" class="cajasinput">
                 <select class="form-select" id="category" aria-label="Default select example">
                     <option selected>Select...</option>
@@ -37,8 +40,15 @@
 
             <input type="submit" value="Send" id="createTask">
         </div>
-
+       
         <div id="container" class="elemento">
+            <div>
+                <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </div>
+
         </div>
 
         <div id="modalcont"></div>

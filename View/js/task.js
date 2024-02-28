@@ -203,7 +203,7 @@ async function llenarModal2(num) {
     document.getElementById('exampleModalLabel').innerText = `Tarea # ${datos[0].numTask}`
 
     document.getElementById('averprueba').innerHTML = `
-        <label for="recipient-name"  class="col-form-label">Name task:</label> 
+        <label for="recipient-name"  class="col-form-label"><strong> Name task:</strong> </label> 
         <textarea class="form-control" id="nameTaskM2">${datos[0].nameTask}</textarea>
         <label for="recipient-name"  class="col-form-label">Description:</label> 
         <textarea class="form-control" id="descTaskM2">${datos[0].descTask}</textarea>
@@ -329,9 +329,9 @@ btnCreate.addEventListener('click', () => {
     postTask()
 });
 
-btnCerrar.addEventListener('click', () => {
-    closeSession()
-});
+// btnCerrar.addEventListener('click', () => {
+//     closeSession()
+// });
 const botnmodal2 = document.getElementById('editButton')
 botnmodal2.addEventListener('click', () => {
     const valorLocal = localStorage.getItem('task')
