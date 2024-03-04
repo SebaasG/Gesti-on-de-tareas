@@ -329,9 +329,9 @@ btnCreate.addEventListener('click', () => {
     postTask()
 });
 
-// btnCerrar.addEventListener('click', () => {
-//     closeSession()
-// });
+btnCerrar.addEventListener('click', () => {
+    closeSession()
+});
 const botnmodal2 = document.getElementById('editButton')
 botnmodal2.addEventListener('click', () => {
     const valorLocal = localStorage.getItem('task')
