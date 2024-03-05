@@ -10,11 +10,8 @@ html {
   border: none;
   padding: 10px;
   border: none;
-  color: #014ba0;
+  color: #000;
 
-
-}
-h1{
 
 }
 
@@ -33,18 +30,12 @@ h1{
 
 }
 
-.d-flex{
-  align-items: center;
-}
-
 .tittleHeader {
 
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 15px;
-  color: #014ba0; 
 }
 
 
@@ -154,18 +145,12 @@ h3 {
   margin: 15px;
 }
 
-.docuInput{
-  border-color: #f0f0f0;
-}
-
-
-
-.cajasinput,input {
+.cajasinput,
+input {
   display: inline-block;
   height: 5vh;
   width: 50vh;
   margin-bottom: 0px;
-  border-color: gray;
 }
 
 textarea {
@@ -175,16 +160,16 @@ textarea {
 
 }
 
-/* .nabvars {
+.nabvars {
   display: flex;
-  justify-content:center;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 0px;
   margin-right: 55vh;
   margin-top: 30px;
 
 
-} */
+}
 
 .btnp button {
   background-color: #f0f0f0;
@@ -208,20 +193,14 @@ textarea {
   display: flex;
   height: 7vh;
   width: 15vh;
-  border-radius: 10px;
+  border-radius: 20px;
   justify-content: center;
   margin: auto;
   margin-top: 50px;
   border: solid 2px #014ba0;
   color: #014ba0;
   font-size: 20px;
-  background-color: white;
 
-}
-
-.me-2 {
-  height: 40px;
-  width: 40vh;
 }
 
 #createTask:hover {
