@@ -5,7 +5,7 @@ import { TaskController } from "../Controller/TaskController.js";
 export const createUserRoutes = ({ usuarioModel }) => {
     const userRoutes = Router()
     const UserController = new userController({ usuarioModel })
-
+   
     userRoutes.get("/login/:user/:pass", UserController.verifySession)
     userRoutes.post('/register', UserController.registerUser)
 
@@ -15,7 +15,7 @@ export const createUserRoutes = ({ usuarioModel }) => {
 export const createTaskRoutes = ({ TaskModel }) => {
     const taskRoutes = Router()
     const taskController = new TaskController({ TaskModel })
-
+// taskRoutes.get('/')
     taskRoutes.get("/get/:user", taskController.getTask)
     taskRoutes.post('/save', taskController.createTask)
     taskRoutes.get('/:user' ,taskController.findDoc)
