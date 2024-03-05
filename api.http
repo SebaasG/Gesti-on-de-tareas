@@ -13,7 +13,6 @@ Content-Type: application/json
 ###
 GET http://localHost:1234/task/get/1052382113
 
-
 ###
 GET http://localHost:1234/task/doc/d5bc02a1-d4de-11ee-aa49-ec8eb55104fd
 ###
