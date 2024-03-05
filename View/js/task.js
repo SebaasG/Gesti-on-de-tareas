@@ -264,7 +264,7 @@ function LlenarCbo() {
 }
 
 function llenarRadio() {
-    const valorradio = localStorage.getItem('state')
+        const valorradio = localStorage.getItem('state')
 
     const radioElement = document.getElementById('radios1')
     const radioElement1 = document.getElementById('radios2')
