@@ -38,7 +38,7 @@ export class TaskController {
     updateTask = async (req, res) => {
         try {
             const result = req.body
-            console.log(result.idTask,result.nameTask, result.descTask, result.stateTask, result.cateTask)
+    
             const updateTask = await this.TaskModel.updateTask(result.idTask, result.nameTask, result.descTask, result.stateTask, result.cateTask);
             if (updateTask == true) {
                 res.status(201).json({ message: 'Se actualizo: ', data: result })
