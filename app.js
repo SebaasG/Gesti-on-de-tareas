@@ -9,7 +9,7 @@ import path, {dirname} from 'path';
 
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = dirname(__filename);    
 const app = express();
 app.use(json());
 app.use(corsMiddleware());
@@ -27,9 +27,7 @@ app.get('/index.html', (req, res) => {
     res.sendFile(filePath);
     
   });
- 
 
- 
 // Ahora puedes usar __dirname como lo harías en un módulo de CommonJS
 
 

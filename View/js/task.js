@@ -25,12 +25,12 @@ async function getTask() {
         const states = state(datos.stateTask);
         const cate = validarCate(datos.cateTask);
         let div = document.createElement('div');
-        div.innerHTML = `
+        div.innerHTML = `   
             <div id = 'tarjet${contador}' class="tarjet" data-bs-toggle="modal" data-bs-target="#miModal">
             <div class="contenido"> 
             <h4>${datos.nameTask}</h4> <br>
             <p>Tarea: #${datos.numTask} </p>
-            <p>categoria: ${cate} </p>
+            <p>categoria: ${cate} </p>  
             <p>Fecha de creacion: ${formattedDate}</p>
             <p>Estado: ${states}</p>
             </div>
