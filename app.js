@@ -19,7 +19,7 @@ app.use('/task', createTaskRoutes({ TaskModel: TaskModel }));
 const PORT = process.env.PORT || 1234;
 app.disable('x-powered-by');
 
-app.get('/index.html', (req, res) => {
+app.get('/login', (req, res) => {
     // Envía el archivo index.html ubicado en la carpeta public
 
    const  filePath = path.join(__dirname, './index.html');
@@ -32,5 +32,5 @@ app.get('/index.html', (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log('This application listening on the port http://localhost:' + PORT+'/index.html');
+    console.log('This application listening on the port http://localhost:' + PORT+'/login');
 });
